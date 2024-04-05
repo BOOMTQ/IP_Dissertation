@@ -1,0 +1,231 @@
+\documentclass[ oneside,% the name of the author
+                    author={Cassie Qing Tang},
+                % the degree programme: BSc, MEng, MSci or MSc.
+                    degree={BSc},
+                % the dissertation    title (which cannot be blank)
+                     title={An Automated Response System for Disrupting Online Pet Scamming \\ },
+                % the dissertation subtitle (which can    be blank)
+                    subtitle={ }]{dissertation}
+
+\usepackage[english]{babel}
+\usepackage[nottoc]{tocbibind}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage[list=true]{subcaption}
+\usepackage{caption}
+\captionsetup[figure]{labelformat=empty} % This disables automatic labelling of graphics
+\captionsetup[subfigure]{labelformat=empty} % This disables automatic labelling of graphics
+
+\begin{document}
+
+\maketitle
+\fronmatter
+
+\chapter*{Abstract}
+This project targets the growing threat of online pet scams by creating an automated system to waste scammers' time and resources, aiding in scam identification and prevention. Following extensive development and testing, a four-week experimental deployment against pet scammers unveiled and refined effective scam-baiting tactics.
+
+\chapter*{Acknowledgements}
+I would like to express my special thanks to my supervisor, Dr Matthew Edwards, for his help and guidance in this project.
+\\
+\\
+I would also like to give my thanks to School of Engineering for inviting me into UoB Computer Science OpenAI Team, which reimburses me the cost of using the different APIs of OpenAI.
+\\
+\\
+Sign up for GitHub Student Developer Pack provides me free access to many useful tools, involving Maligun and Name.com. Appreciate the resources it provides!
+
+\makedecl
+
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\chapter*{Ethics Statement}
+An ethics application for this project was reviewed and approved by the faculty research ethics committee as application 17599.
+
+
+\chapter*{Supporting Technologies}
+I created my system based on an open-source GitHub repository from \url{https://github.com/an19352/scambaiter_back}. I extended and altered its code to fit my needs.
+\\
+\\
+I integrated two GPT models, specifically GPT-3.5-turbo-0125 and GPT-4-0125-preview, into my system via their APIs to ensure the functionality of an automatic email reply feature. One necessary API key was acquired and configured using the resources available at \url{https://openai.com/}.
+\\
+\\
+I applied my own domain name from \url{https://www.name.com/} in order to generate a large number of bait-email addresses.
+\\
+\\
+I obtained a mailgun API key and build a mailbox server on \url{https://www.mailgun.com/}, which can support emails receiving, sending and tracking.
+
+\chapter*{Notation and Acronyms}
+\begin{quote}
+\noindent
+\begin{tabular}{lcl}
+AFF                 &:     & Advance Fee Fraud    
+ \\ 
+HTTP/HTTPS          &:     & Hypertext Transfer Protocol/Secure
+ \\ 
+Regex               &:     & Regular Expression
+\\
+NLP                 &:     & Natural Language Processing
+\\
+SSL                 &:     & Secure Sockets Layer
+\\
+JSON                &:     & JavaScript Object Notation
+\\
+A*                  &:     & A-star
+
+
+\end{tabular}
+\end{quote}
+
+
+\mainmatter
+
+\chapter{Introduction}
+\label{chap:context}
+In the definition of online scam, both advance fee and non-delivery frauds can be defined as a social engineering attack. The former is that fraudsters often promise their victims goods or more money in order to convince them to pay a fee upfront \cite{claude_toward_2014}. This scheme has been widely applied to lottery scams, inheritance scams, romance scams, etc. While the latter can be seen as a concrete realisation of the former that victims could never receive the goods even though they have sent the payment \cite{whittaker_understanding_2020}. In recent years, the happen of these two types of fraud have become increasingly frequently with the growing demand for online shopping and the development of logistics. According to the Internet Crime Report for 2019 \cite{noauthor_2019_nodate}, more than 60,000 Americans experienced non-delivery scams during the year, and another 14,607 Americans reported that they had been subjected to the AFF. The total amount of money involved in both reached nearly \$300 million. The newly released annual report for 2023 shows this amount has risen to \$450 million, even as the complaint count for the corresponding type of fraud has decreased \cite{noauthor_2023_nodate}. Simultaneously, the UK is also witnessing a similar rise in the prevalence of AFF with a substantial 549\% increase noted in March 2023 compared to three years prior \cite{stripe_crime_2023}. These similar growing trends are indeed a cause for concern.
+
+\chapter{Technical Background}
+\section{Petscams.com}
+The data for pet scam websites in this study was sourced from a volunteer organisation called petscams.com. This organisation operates a website, using the same domain name, to list fraudulent pet sales and shipping sites \cite{brady_fighting_2024}. Petscams.com is an effective and free platform offering a range of security services to alert the public about the danger of those websites. These services include victim reporting and comment systems, fraudulent website analysis, verification, classification, and continuous article updates. They also provide access of these data to law enforcement agencies to better disrupt and combat scammer activities. Beyond that, they have been a valuable resource for other researchers. For instance, their victim report system significantly contributed to a pet scam case study published in 2020 \cite{whittaker_understanding_2020}.
+\\
+
+Figure 1 illustrates how articles on this website maintain consistent HTML structural features in the developer mode of the Chrome browser. It's clear to see each article is nested within an $<$article$>$ tag, which is part of the HTML5 semantic markup, used to define independent content modules on the website. Importantly, each article's title, which the suspected fraudulent domain information, is placed within the $<$h2$>$ tag. This organised layout simplifies the creation of an efficient, universal website link crawler in the system development, providing a strong support basis for technical implementation.
+\\
+
+Furthermore, as shown in Figure 2 and Figure 3, the page layout across different articles is also remarkably uniform. Each article segments the key points and introductory content, ensuring information is presented clearly. The breakdown of each scam website in the article consists of four main parts - identity, review credibility, legality, and recommended next steps - for in-depth description and analysis. This thoughtful design considerably assists victims and researchers, in quickly and fully understanding the workings of pet scams.
+\begin{figure}[!htb]
+    \centering
+    % First bigger subfig
+    \begin{subfigure}[b]{0.7\textwidth}
+        \includegraphics[width=\linewidth,height=0.25\textheight]{pic/figure1.png}
+        \label{fig:petscams}
+    \end{subfigure}
+    \caption{Figure 1: Petscans.com in the developer mode}
+    \label{fig:main1}
+\end{figure}
+
+\begin{figure}[!htb]\ContinuedFloat
+    \centering
+    % Second subfig
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\linewidth]{pic/figure2.png}
+        \caption{Figure 2: Scam - Homeafc.com}
+        \label{fig:sub2}
+    \end{subfigure}
+    \hfill % Used to add some space between subgraphs
+    % Third subfig
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\linewidth]{pic/figure3.png}
+        \caption{Figure 3: Scam - Outwestschnauzers.com}
+        \label{fig:sub3}
+    \end{subfigure}
+    \caption{Figure 2 (Homeafc.com) and Figure 3 (Homeafc.com)}
+    \label{fig:main2}
+\end{figure}
+
+
+\section{Web Scraping}
+Compared to traditional manual data collection, web scraping can automatically retrieve unstructured data from a large amount of text such as HTML, then convert it into a structured format and store it locally \cite{khder_web_2021}. As Zhao stated \cite{zhao_web_2017}, the web scraping process mainly includes two parts: acquiring web resources and extracting specific information from the received data. The former refers to accessing the target webpage via the HTTP protocol, while the latter is to parse and extract the necessary data through automated scripts, and then save it in a specific format for further analysis. In this section, we will focus on discussing the most commonly used technology libraries when performing these two stages.
+\\
+
+In the first stage of web scraping, communication with the web server needs to be conducted through the HTTP, which is a request-response protocol that supports most web pages \cite{chandra_python_2015}. The Requests library in Python simplifies interaction with the target URL, providing efficient and reliable methods. As one of the most popular HTTP libraries, it supports the use of various HTTP methods, including GET, POST, PUT, and DELETE. Moreover, it also includes advanced features such as handling error and exception, authentication, redirects, sessions and SSL verification \cite{noauthor_requests_nodate}. These features meet all the requirements of the initial steps, ensuring the simplification of obtaining and processing server responses, including headers, session cookies, and status codes.
+\\
+
+For the second stage, various tech libraries can be utilised to parse and extract web data. Currently, BeautifulSoup, Selenium, and Scrapy are widely used because of their powerful capabilities. These tools focus on interactions with websites, as well as the extraction and parsing of data, each one demonstrating its own performance and advantages.
+\\
+
+BeautifulSoup is a Python library designed for parsing HTML and XML documents. It offers a simple and user-friendly syntax, enabling users to swiftly locate the necessary elements in the parsing tree using selectors like tag names, id names, etc \cite{chandra_python_2015}. For small or medium-sized crawling tasks on static web pages, BeautifulSoup can often be paired with the Requests library to form a lightweight tool combination. It's important to note that this technology library primarily focuses on parsing work and does not involve constructing concurrent requests.
+\\
+
+Similarly, Selenium does not support concurrent requests, which limits its efficiency in asynchronously executing multi-site scraping tasks to a certain extent. However, as a browser automation tool, Selenium supports multiple programming languages including Python, Java, and C\#, demonstrating unique capabilities in automating web browser operations \cite{fariha_beautifulsoup_2023}. Due to the unique support for JavaScript dynamically loaded pages \cite{fariha_beautifulsoup_2023}, it specialises in simulating human user actions, such as scrolling through pages, filling out forms, and clicking buttons. Additionally, unlike tools that need to be combined with the Requests library to send HTTP requests, scripts written by Selenium can run independently, using its built-in browser control functions to directly access and operate web pages. As the automated form filling will be introduced in project development, Selenium will become an indispensable tool library.
+\\
+
+Scrapy is a web crawler framework written in Python, which includes a complete set of web scraping solutions, including request handling mechanisms, data extraction, and database storage \cite{noauthor_intro_nodate}. Utilising the Twisted asynchronous network framework, Scrapy supports efficient concurrent request handling, making it particularly suitable for large-scale data crawling tasks and complex web data collection projects \cite{noauthor_intro_nodate}. Apart from being less self-sufficient in handling JavaScript than Selenium, and new users may encounter a certain learning curve, Scrapy better integrates the key functions of both Requests and BeautifulSoup. Thus, it can complete tasks independently in most scenarios without relying on external libraries.
+\\
+
+However, the demand of this project is relatively simple, there is no need to handle a large number of concurrent requests or complex data crawling. Therefore, I finally chose Requests, BeautifulSoup and Selenium as tools for the crawler development, since our main focus is to prioritise the smooth execution of the overall system process. While this approach may not be as comprehensive as Scrapy, it offers sufficient flexibility and convenience to meet project requirements. If necessary, it has also kept a door open for incorporating more efficient and complex crawling technologies in the future.
+
+
+\section{Recognition and Processing of Text Data}
+Throughout the construction and execution of the project system, various types of text data will be encountered, such as form content, email content, and time records. To manage these data effectively, this section introduces various methods for implementing information retrieval, guided by the heuristic search algorithm concept. These methods can be used separately or in combination, to ensure that the system identifies and processes text data accurately and efficiently.
+\\
+
+Heuristic search is a goal-oriented searching method. While it doesn't always guarantee the optimal solution, it usually provides high-quality solutions \cite{a_chapter_2001}. The heuristic search algorithm, also known as the A* algorithm, merges the benefits of keyword search and clustering. When dealing with NP problems that have incomplete solving conditions, the following evaluation function is established \cite{zhao_information_2014}:
+\\
+
+f(n)=g(n)+h(n)
+\\
+
+Here, f(n) represents the total estimated cost of node n, g(n) represents the actual path cost from the beginning state to node n, and h(n) stands for the heuristic estimated cost from node n to the goal. These values can help reflect the distance between the node and the goal, guiding the optimal path with each search step. This algorithm improves search efficiency by avoiding the exploration of invalid paths, thus improving the accuracy of vital information retrieval while ensuring the response speed. Therefore, the essence of heuristic search is to use limited information to achieve the search goal at the lowest cost. After acquiring substantial data through web scraping, this logic can also facilitate the fast batch retrieval of relevant information. Based on the characteristics or patterns of the data items, you can predefine the keyword groups, key data types, and different pattern matches. This allows scripts to execute "semi-structured" searches, effectively recognising and filtering vast amounts of text \cite{manning_introduction_2009}.
+\\
+
+Furthermore, the use of Regex and the FuzzyWuzzy library also demonstrates the application of heuristic search. As Uzum's report \cite{uzun_comparison_2018}, Regex is a sequence of characters that define a search pattern. With the introduction of the "re" module in Python, a pattern is predefined to extract data. However, this study also found that data extracted using Regex is only 43.5\% accurate compared to the expected data. Therefore, this project will consider using only simple Regex rules to remove unnecessary text information. 
+\\
+
+FuzzyWuzzy is a Python library used for string matching. Unlike Regex, once this library is utilised, a relevance score ranging from 0-100 need to be set \cite{majumder_fuzzywuzzy_2021}. The higher the score, the more closely the query word should match the target string. This can also be viewed as the retrieval constraints defined in retrieval heuristics \cite{yang_secure_2021}. By using fuzzy string matching, this heuristic method allows for a wider range of possibilities for a target string with uncertain content, thereby preventing over-matching a single query word.
+
+
+\section{API Integration}
+Integrate external services like mail services and AI services to enhance automated response systems: OPENAI\_API, MAILGUN\_API
+
+
+
+
+
+
+\chapter{Project Execution}
+\section{Development Phase}
+This section elaborates on the practical implementation of the technologies which have been discussed in Chapter 2 during the system development.
+
+
+
+\section{Testing Phase}
+
+
+
+
+\section{Experiment Phase}
+
+
+
+
+
+
+\chapter{Analysis of results}
+
+
+
+\chapter{Critical Evaluation}
+
+
+
+
+
+
+
+
+
+\chapter{Conclusion}
+In conclusion, this project effectively combats the rise of online pet scams by employing an automated system designed to deplete scammers' resources and deter fraudulent activities. Over a four-week experimental phase, four robotic responders consistently engaged scammers, wasting at least a month of their time. Dozens of scammers continued to interact with the system even after the experiment concluded. This not only aids in scam prevention but also refines scam-baiting strategies, contributing valuable insights into the fight against non-delivery fraud and advance fee fraud.
+\\
+
+Besides, the future direction of this project may focus on integrating the script for filling non-delivery fraud websites with other systems that can classify fraudulent advertisements or websites. This could include the code for automatic detection of pet scam websites \cite{mehmedov_ronel-mehmedovdissertation2021_2021}.
+
+
+
+% \bibliographystyle{ieee}
+\bibliography{references}
+
+\appendix
+
+\chapter{Appendix A: }
+\label{}
+
+
+
+
+
+
+\end{document}
