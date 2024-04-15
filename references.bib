@@ -1,4 +1,244 @@
 
+@mastersthesis{mehmedov_automated_2021,
+	title = {Automated classification of pet scam websites},
+	abstract = {Pet scams are a type of cyber fraud where criminals create website platforms to advertise fictitious pets
+and extract money without providing any goods to the victims. Scammers also use fake delivery websites
+to extract additional funds from victims on the pretext of delivery costs and charges. This project seeks
+to develop a classifier that differentiates between legitimate and fraudulent pet sale and delivery websites. In order to do this, I collected data online by creating a web scraper which extracts HTML and images from pet sale and delivery websites. Subsequently, I processed the data to create features that can be used for automated decision making. By testing these features as data points for a classifier, the project also explores the usefulness of these features in predicting whether a website is a pet scam or not, which is useful information that can be used by other researchers who seek to develop anti-fraud software in this context.
+My research hypothesis is that a machine learning classifier can be developed that can detect pet
+scam websites with high degree of accuracy. This project explored two features that have been proved to
+connect pet scam websites in a previous study - HTML and image similarity. The project assessed their
+value as data points for a machine learning classifier. In addition to this, the project explored four more
+features which have not been previously discussed in literature regarding pet scams - presence of address, image to HTML ratio, menu options and financial data. I found that the feature that evaluates menu
+options has very high predictive accuracy in classifying pet sale websites as legitimate or fraudulent. I
+also found that the minimum, maximum and average price found in a website could be also a useful
+indicator in that regard as well as the ratio between HTML pages in a website and the number of images
+found in it. Moreover, I tested four different algorithms and identified that Random Forests provide the
+best performance for classifying pet advertising websites and Logistic Regression has the highest results
+for pet delivery websites. The important outcomes of this project can be summarized as follows:
+• I developed a machine learning classifier that can predict whether a website is a fraudulent pet sale
+website with 97\% accuracy. The classifier for delivery websites can predict whether a website is a
+fake delivery website with 89\% accuracy.
+• In order to do this, I created scraping scripts which extracted HTML and image files from 5808
+websites. The scraper extracts statically served pages as well as asynchronously loaded content.
+• I created two features that explored the usefulness of data points which have been previously
+highlighted to have high predictive accuracy in the context of pet scams.
+• I analysed the data obtained and created four features that can be used to automate the detection of
+fraudulent websites in the context of pet scams. These features have not been discussed in previous
+pet scam literature and can be applied in subsequent projects in the same field.
+The code used for scraping images and HTML, feature engineering and training the machine learning
+models is available for viewing at https://github.com/Ronel-Mehmedov/dissertation2021.git.},
+	language = {en},
+	urldate = {2024-04-09},
+	school = {University of Bristol},
+	author = {Mehmedov, Ronel},
+	month = sep,
+	year = {2021},
+}
+
+@mastersthesis{alsaleh_scam_2017,
+	title = {Scam {Detection} in {Online} {Classified} {Advertisements}},
+	copyright = {Database copyright ProQuest LLC; ProQuest does not claim copyright in the individual underlying works.},
+	url = {https://www.proquest.com/docview/2019897494/abstract/6DCA3AFA48354982PQ/1},
+	abstract = {Online classified ad websites have become one of the most fundamental parts of the advertisement industry. Popular customer-to-customer marketplaces such as Craigslist and eBay, have attracted millions of consumers for trading and purchasing secondhand items. Because of the high financial return sellers can gain by using these sites and the anonymity some websites provide by not requiring their users to create user accounts to post ads, online classified sites have a high potential for fraudulent activities. The primary objective of this thesis is to develop a computational approach to scam detection in online classified ads. In this research, we first highlight the unique characteristics of scams compared with spam and provide a definition of scams in the general context of online classified ads; then we identify a set of novel features that signal scam or legitimate ads based on the heuristics we derived from observing and exploring the real-world data; and finally, we develop machine learning models for detecting scams in online classified ads and test the models with real-world data collected from Craigslist. The experiment results show that the proposed scam detection models achieved an F-measure of 0.955. The findings of this thesis have significant implications for improving the trustworthiness of customer-to-customer online marketplaces.},
+	language = {en},
+	urldate = {2024-04-15},
+	school = {University of Maryland},
+	author = {Alsaleh, Hamad},
+	year = {2017},
+	note = {ISBN: 9780355674071},
+	keywords = {Applied sciences, Classification, Classified ads, Communication and the arts, Data mining, Deception, Machine learning, Scam detection, Social sciences},
+}
+
+@article{norazman_development_2014,
+	title = {Development of {Scammed} {Posts} {Detector}: {A} {Case} {Study} of {Pet} {Scammed} {Posting}},
+	abstract = {This paper presents a research on scammed posts detector which focused on pet scammed posting detection. The research was motivated by the unawareness of pet lovers and owners on the pet scamming activities over the internet. Additionally, the current scam detectors are not able to notify the user on the potential pet scam posts they are dealing with. The objective of the research is to develop an application to automatically identify and alert the user on the potential pet scammed posting as an extension to dear current email system. The scope of the research are online pet advertisements and email communications between victims and scammers. Preliminary investigation on real pet scammed emails, experiences of the real pet scam victims and the public awareness regarding pet scams have been conducted to support the research development. Pet details, hardship of the family, obstacles faced and victim details are among the patterns extracted in the collection of real pet scammed emails. The system is tested against the human baseline and reached up to 86\% of accuracy.},
+	language = {en},
+	author = {Norazman, Nor Sa’datul Aqma and Zamin, Norshuhani},
+	year = {2014},
+}
+
+@misc{lloyds_bank_fraudsters_2023,
+	title = {Fraudsters go unleashed online as pet scams rise},
+	url = {https://www.lloydsbankinggroup.com/media/press-releases/2023/lloyds-bank-2023/fraudsters-go-unleashed-online-as-pet-scams-rise.html},
+	abstract = {New research from Lloyds Bank shows that people are losing an average £307 to pet scams – with over 50\% of scams originating on Meta-owned platforms Facebook and Instagram.},
+	language = {en},
+	urldate = {2024-04-15},
+	author = {{LLOYDS BANK}},
+	month = jul,
+	year = {2023},
+}
+
+@misc{better_business_bureau_bbb_2017,
+	title = {{BBB} {Study}: {Puppy} {Scams} {Full} {Study}},
+	shorttitle = {{BBB} {Study}},
+	url = {https://www.bbb.org/all/scamstudies/puppy-scams/puppy-scams-full-study},
+	abstract = {Fraud in the sale of online pets is on the rise, with scammers victimizing American consumers at an alarming rate. In recent years, Americans have filed tens of thousands of complaints with law enforcement, consumer organizations and online websites.},
+	language = {en},
+	urldate = {2024-04-15},
+	journal = {International Association of Better Business Bureaus},
+	author = {{Better Business Bureau}},
+	year = {2017},
+}
+
+@article{better_business_bureau_bbb_2022,
+	title = {{BBB} {Study} {Update}: {Average} losses in puppy scams rising, even as cases fall},
+	shorttitle = {{BBB} {Study} {Update}},
+	url = {https://www.bbb.org/article/investigations/27895-bbb-study-update-average-losses-in-puppy-scams-rising-even-as-cases-fall},
+	abstract = {BBB urges consumers to exercise caution this holiday season when purchasing a pet online.},
+	language = {en},
+	urldate = {2024-04-15},
+	author = {{Better Business Bureau}},
+	month = dec,
+	year = {2022},
+}
+
+@article{shaw_report_2024,
+	title = {Report shows impact fraud has on people's mental health},
+	url = {https://www.getreading.co.uk/news/cost-of-living/report-shows-impact-fraud-peoples-28861638},
+	abstract = {Fraud now accounts for approximately 38\% of all crime experienced by adults in England and Wales},
+	language = {en},
+	urldate = {2024-04-15},
+	journal = {Wales Online},
+	author = {Shaw, Neil},
+	month = mar,
+	year = {2024},
+	note = {Section: Cost Of Living},
+}
+
+@misc{ipata_current_nodate,
+	title = {Current {Pet} {Scams}},
+	url = {https://www.ipata.org/current-pet-scams},
+	abstract = {With online scams on the rise, please be aware of the many different types of pet scams. Many times users are lured in by a cute puppy or other pet for sale, only to find out that they have been scammed out of their money. The best way to avoid being scammed by those who are selling pets online is to educate yourself on the warning signs of a typical online pet scam. Below are listed some of the common and known scams that we see on a regular basis. If you have questions about a company, email, website or if you feel you have been scammed, please contact us at petscams@ipata.org.},
+	language = {EN},
+	urldate = {2024-04-15},
+	author = {{IPATA}},
+}
+
+@inproceedings{price_resource_2020,
+	title = {Resource {Networks} of {Pet} {Scam} {Websites}},
+	url = {https://ieeexplore.ieee.org/document/9493253},
+	doi = {10.1109/eCrime51433.2020.9493253},
+	abstract = {The pet scam is a form of online fraud in which scammers leverage victims’ emotional attachment to fictitious pets as a means for extorting money. Both fraudulent pet seller sites and fraudulent delivery sites are involved in the scam. When sites of either kind are taken down, scammers create new sites, often reusing effective content from previous scams.We explore connections within the largest current collection of pet scam websites, examining four distinct types of resource sharing that are indicative of shared authorship. We find that 90\% of all accessible sites share at least one form of connection to another known site, including many identifiable links between seller and delivery sites, and that some scam authors could be behind hundreds of individual scam websites. We partially validate our linkage methods using domain registration data, and discuss the implications of using different connection types to analyse online fraud more generally.},
+	language = {EN},
+	urldate = {2024-04-15},
+	booktitle = {2020 {APWG} {Symposium} on {Electronic} {Crime} {Research} ({eCrime})},
+	author = {Price, Benjamin and Edwards, Matthew},
+	month = nov,
+	year = {2020},
+	note = {ISSN: 2159-1245},
+	keywords = {Couplings, Frequency-domain analysis, Resource management, clustering, link analysis, online fraud, pet scam},
+	pages = {1--10},
+}
+
+@misc{sturtz_sets_nodate,
+	title = {Sets in {Python} – {Real} {Python}},
+	url = {https://realpython.com/python-sets/},
+	abstract = {In this tutorial you'll learn how to work effectively with Python's set data type. You'll see how to define set objects in Python and discover the operations that they support and by the end of the tutorial you'll have a good feel for when a set is an appropriate choice in your own programs.},
+	language = {en},
+	urldate = {2024-04-12},
+	author = {Sturtz, John},
+}
+
+@misc{noauthor_robotstxt_nodate,
+	title = {Robots.txt {Introduction} and {Guide} {\textbar} {Google} {Search} {Central} {\textbar} {Documentation}},
+	url = {https://developers.google.com/search/docs/crawling-indexing/robots/intro},
+	abstract = {Robots.txt is used to manage crawler traffic. Explore this robots.txt introduction guide to learn what robot.txt files are and how to use them.},
+	language = {en},
+	urldate = {2024-04-12},
+	journal = {Google for Developers},
+}
+
+@misc{an19352_an19352scambaiter_back_2023,
+	title = {an19352/scambaiter\_back},
+	url = {https://github.com/an19352/scambaiter_back},
+	urldate = {2024-04-09},
+	author = {an19352},
+	month = may,
+	year = {2023},
+	note = {original-date: 2023-05-16T15:55:50Z},
+}
+
+@misc{noauthor_openai_nodate,
+	title = {{OpenAI} {Platform}},
+	url = {https://platform.openai.com/docs},
+	abstract = {Explore developer resources, tutorials, API docs, and dynamic examples to get the most out of OpenAI's platform.},
+	language = {en},
+	urldate = {2024-04-07},
+}
+
+@misc{3blue1brown_but_2024,
+	title = {But what is a {GPT}?  {Visual} intro to {Transformers} {\textbar} {Chapter} 5, {Deep} {Learning}},
+	shorttitle = {But what is a {GPT}?},
+	url = {https://www.youtube.com/watch?v=wjZofJX0v4M},
+	abstract = {Unpacking how large language models work under the hood
+Early view of the next chapter for patrons: https://3b1b.co/early-attention
+Special thanks to these supporters: https://3b1b.co/lessons/gpt\#thanks
+
+To contribute edits to the subtitles, visit https://translate.3blue1brown.com/
+
+Other recommended resources on the topic.
+
+Richard Turner's introduction is one of the best starting places:
+https://arxiv.org/pdf/2304.10557.pdf
+
+Coding a GPT with Andrej Karpathy
+   • Let's build GPT: from scratch, in cod...  
+
+Introduction to self-attention by John Hewitt
+https://web.stanford.edu/class/cs224n...
+
+History of language models by Brit Cruise:
+   • ChatGPT: 30 Year History {\textbar} How AI Lea...  
+
+Paper about examples like the “woman - man” one presented here:
+https://arxiv.org/pdf/1301.3781.pdf
+
+------------------
+
+Timestamps
+
+0:00 - Predict, sample, repeat
+3:03 - Inside a transformer
+6:36 - Chapter layout
+7:20 - The premise of Deep Learning
+12:27 - Word embeddings
+18:25 - Embeddings beyond words
+20:22 - Unembedding
+22:22 - Softmax with temperature
+26:03 - Up next
+
+------------------
+These animations are largely made using a custom Python library, manim.  See the FAQ comments here:
+https://3b1b.co/faq\#manim
+https://github.com/3b1b/manim
+https://github.com/ManimCommunity/manim/
+
+All code for specific videos is visible here:
+https://github.com/3b1b/videos/
+
+The music is by Vincent Rubinetti.
+https://www.vincentrubinetti.com
+https://vincerubinetti.bandcamp.com/a...
+https://open.spotify.com/album/1dVyjw...
+
+------------------
+
+3blue1brown is a channel about animating math, in all senses of the word animate. If you're reading the bottom of a video description, I'm guessing you're more interested than the average viewer in lessons here. It would mean a lot to me if you chose to stay up to date on new ones, either by subscribing here on YouTube or otherwise following on whichever platform below you check most regularly.
+
+Mailing list: https://3blue1brown.substack.com
+Twitter:   / 3blue1brown  
+Instagram:   / 3blue1brown  
+Reddit:   / 3blue1brown  
+Facebook:   / 3blue1brown  
+Patreon:   / 3blue1brown  
+Website: https://www.3blue1brown.com},
+	urldate = {2024-04-07},
+	author = {{3Blue1Brown}},
+	month = apr,
+	year = {2024},
+}
+
 @patent{zhao_information_2014,
 	title = {Information search method based on heuristic method},
 	url = {https://patents.google.com/patent/CN103646035A/en},
@@ -151,15 +391,6 @@
 	urldate = {2024-04-01},
 	author = {Persson, Emil},
 	year = {2019},
-}
-
-@misc{mehmedov_ronel-mehmedovdissertation2021_2021,
-	title = {Ronel-{Mehmedov}/dissertation2021: {Code} for '{Automatic} detection of pet scam websites'},
-	url = {https://github.com/Ronel-Mehmedov/dissertation2021},
-	urldate = {2024-03-25},
-	author = {Mehmedov, Ronel},
-	month = sep,
-	year = {2021},
 }
 
 @misc{brady_fighting_2024,

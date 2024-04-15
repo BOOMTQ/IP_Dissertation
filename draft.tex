@@ -16,8 +16,6 @@
 \usepackage{caption}
 \captionsetup[figure]{labelformat=empty} % This disables automatic labelling of graphics
 \captionsetup[subfigure]{labelformat=empty} % This disables automatic labelling of graphics
-\usepackage[utf8]{inputenc}
-
 
 \begin{document}
 
@@ -96,39 +94,11 @@ URL/url             &:     & Uniform Resource Locator
 
 \chapter{Introduction}
 \label{chap:context}
-In the definition of online scam, both advance fee and non-delivery frauds can be defined as a social engineering attack. The former is that fraudsters often promise their victims goods or more money in order to convince them to pay a fee upfront \cite{claude_toward_2014}. This scheme has been widely applied to lottery scams, inheritance scams, romance scams, etc. While the latter can be seen as a concrete realisation of the former that victims could never receive the goods even though they have sent the payment \cite{whittaker_understanding_2020}. In recent years, the happen of these two types of fraud have become increasingly frequently with the growing demand for online shopping and the development of logistics. According to the Internet Crime Report for 2019 \cite{noauthor_2019_nodate}, more than 60,000 Americans experienced non-delivery scams during the year, and another 14,607 Americans reported that they had been subjected to the AFF. The total amount of money involved in both reached nearly \$300 million. The newly released annual report for 2023 shows this amount has risen to \$450 million, even as the complaint count for the corresponding type of fraud has decreased \cite{noauthor_2023_nodate}. Simultaneously, the UK is also witnessing a similar rise in the prevalence of AFF with a substantial 549\% increase noted in March 2023 compared to three years prior \cite{stripe_crime_2023}. 
-\\
-
-Pet fraud is a typical scam involving AFF and non-delivery frauds. Scammers usually register a domain name at a very low cost to create their own e-commerce website. They attract consumers to purchase non-existent pets by placing a large number of online advertisements on social media such as Facebook and offering low prices \cite{price_resource_2020}. In order to quickly gain the trust of potential victims, scammers build seemingly legitimate websites. They prominently display on the homepage that they have joined some credible real organisations, or claim to be certified as top sellers of certain dog breeds, and display some fake consumer purchase reviews and services they have provided \cite{price_resource_2020}. In addition, most of the cute pet photos displayed on scam websites are sourced from other legitimate platforms \cite{better_business_bureau_bbb_2017}. Scammers attach the name, breed, age, and even fabricated stories about the pet alongside these stolen photos. People interested in owning pets are more likely to desire a purchase after seeing this information. They typically reach out to the scammers via the WhatsApp number, email address, or other contact details provided on the webpage. Alternatively, they may actively complete the contact form on the webpage.
-\\
-
-At this stage, most victims are almost trapped in pet scams. Scammers guide them towards private communication channels that are not supervised by regular e-commerce platforms, using pre-written scam templates to make false promises \cite{ipata_current_nodate}. Once trust is established, victims are asked to pay for pets using non-refundable payment methods like Western Union or MoneyGram, subsequently receiving a tracking number and a URL for a delivery website to track their orders \cite{price_resource_2020}. Unexpectedly, these websites are also controlled by the scammers. These 'pet orders' soon encounter various fictitious transportation and medical issues, resulting in continuous delays in the transaction \cite{price_resource_2020}. Capitalising on the victims' emotional investment, the scammers continuously request additional fees with new excuses until the victims realise they have been deceived. Consequently, the victims not only fail to receive the pets but also lose a significant amount of money. A report indicates that about two-thirds of scam victims in England and Wales have experienced mental health and sleep issues \cite{shaw_report_2024}, which is confirmed by Kanetria Hutcherson's experience \cite{better_business_bureau_bbb_2017}.
-\\
-
-The earlier data comes from a 2015 report by the Federal Trade Commission (FTC) in the United States, which recorded approximately 37,000 pet-related complaints \cite{better_business_bureau_bbb_2017}. The Better Business Bureau's (BBB) recent research indicates that, since 2017, pet scams have represented a quarter of online shopping fraud cases in the US, with the average yearly financial loss for victims continuing to rise \cite{better_business_bureau_bbb_2022}. Similar problems have been reported worldwide in recent years. For instance, Lloyds Bank in the UK noted a significant rise in pet scam complaints according to their released statistics \cite{lloyds_bank_fraudsters_2023}. Relevant research in Australia and Canada also reflects this trend \cite{better_business_bureau_bbb_2017}.
-\\
-
-Despite the above reports have revealed the mature modus operandi of pet scam gangs and their increasingly detrimental impact on society, pet scams have not received as much attention as other similar scams, such as romance scams. Current research and countermeasures are primarily focused on helping the public identify and prevent pet scams. This includes the reporting and searching functions provided by \url{www.ipata.org/pet-scams} and \url{www.petscams.com}, as well as \url{www.aa419.org}, which operates a fake website database. Moreover, there are some technical development projects, such as the development of \textit{Scammed Posts Detector} \cite{norazman_development_2014} and the research of \textit{Automated classification of pet scam websites} \cite{mehmedov_automated_2021}. However, there is still a lack of targeted research that can effectively defend and disrupt such scams.
-\\
-
-This article will further investigate the field of pet scams. Based on the current operational mode of pet scams, an automatic response system that disrupts pet scams has been developed. This system is built on the basis of an expandable Scam-baiting Mail Server \cite{an19352_an19352scambaiter_back_2023}, aiming to contribute to the resistance and disruption of pet scams. As part of the project, multiple web crawlers will be built to extract and process various data. This includes the homepage URLs and form pages of pet scam websites, and the implementation of automatic form filling. On the other hand, the system also needs the functionality to send and receive emails, as scammers will initiate email contact after receiving the form application. By building our own mail server and formulating various response strategies, we will conduct a four-week experimental interaction with pet scammers. After the experiment, relevant information and data will be integrated and analysed to determine the most effective response strategy. Finally, the project results are discussed comprehensively in terms of the success rate of script execution and the response rate of emails. If the project is successful and feasible, the mail system will be able to provide the public with powerful anti-pet scam strategies directly. Besides, the automatic form-filling script can be paired with other advertisement scam detectors, such as the \textit{Scam Detection in Online Classified Advertisements} developed by Hamad Alsaleh \cite{alsaleh_scam_2017}. This can further assist more researchers and anti-fraud organisations in understanding and combating online fraud.
-\\
-
-Therefore, the specific objectives of this project can be summarised as the following key points:
-
-\begin{itemize}
-  \item Apply for a domain name and set up a mail server to manage and control all email addresses under the domain.
-  \item Develop three different web crawlers to extract the home page and form page URLs of pet scam websites, and to automatically fill out the forms.
-  \item Enhance the system functions to automatically gather useful data and information during code execution, which will be used for subsequent email matching and data analysis.
-  \item Develop another crawler to archive emails from scammers into the system using a standardised format.
-  \item Access the API of GPT models, propose four different consumer personalities, and implement automated email responses based on various strategies.
-  \item Analyse data results, evaluate the system performance, and draw the final conclusion of the project practice.
-\end{itemize}
 
 
 \chapter{Technical Background}
 \section{Petscams.com}
-The data for pet scam websites in this study was sourced from a volunteer organisation called \url{Petscams.com}. This organisation operates a website, using the same domain name, to list fraudulent pet sales and shipping sites \cite{brady_fighting_2024}. \url{Petscams.com} is an effective and free platform offering a range of security services to alert the public about the danger of those websites. These services include victim reporting and comment systems, fraudulent website analysis, verification, classification, and continuous article updates. They also provide access of these data to law enforcement agencies to better disrupt and combat scammer activities. Beyond that, they have been a valuable resource for other researchers. For instance, their victim report system significantly contributed to a pet scam case study published in 2020 \cite{whittaker_understanding_2020}.
+The data for pet scam websites in this study was sourced from a volunteer organisation called \url{petscams.com}. This organisation operates a website, using the same domain name, to list fraudulent pet sales and shipping sites \cite{brady_fighting_2024}. \url{Petscams.com} is an effective and free platform offering a range of security services to alert the public about the danger of those websites. These services include victim reporting and comment systems, fraudulent website analysis, verification, classification, and continuous article updates. They also provide access of these data to law enforcement agencies to better disrupt and combat scammer activities. Beyond that, they have been a valuable resource for other researchers. For instance, their victim report system significantly contributed to a pet scam case study published in 2020 \cite{whittaker_understanding_2020}.
 \\
 
 Figure 1 illustrates how articles on this website maintain consistent HTML structural features in the developer mode of the Chrome browser. It's clear to see each article is nested within an $<$article$>$ tag, which is part of the HTML5 semantic markup, used to define independent content modules on the website. Importantly, each article's title, which the suspected fraudulent domain information, is placed within the $<$h2$>$ tag. 
@@ -240,12 +210,6 @@ The core requirement of this project is to effectively understand and generate n
 
 
 \chapter{Project Execution}
-\section{Building a Domain Mail Server}
-
-
-
-
-
 \section{Implementation of Web Scraping}
 In this project, web scraping is primarily used to access, collect, and fill in a large amount of data on the form pages of pet scam websites. We have learned before that \url{www.petscams.com} is a key resource, dedicated to collecting and reporting information on scam websites related to pet sales and transportation. Given that pet transportation scams are often only involved in the later stages of scam activities, and these scam websites do not expect consumers to contact them proactively. Therefore, our crawlers will only focus on those fraudulent pet websites involved in sales.
 
@@ -259,16 +223,14 @@ In the process of testing this script to scrape articles published within the pa
 After adjusting the code and confirming no new articles were being published, \texttt{petscam\_crawl.py} was run again. At this point, the program successfully removed 104 invalid links and 29 duplicates from the original 460, reducing the total number of links down to 327. These changes may have slightly impacted performance, increasing the crawler's running time. However, they effectively prevented the potential waste of time and decrease in accuracy that invalid or duplicate links could cause in the subsequent code execution process.
 
 
-\section{Implementation of Email Automation Processing}
-
-\subsection{Integrating Response Strategies}
+\section{Integrating Response Strategies}
 
 
 
 
 
 \section{Construction and Operation of the System}
-The system was built on an open-source, expandable scam-baiting mail server \cite{an19352_an19352scambaiter_back_2023}, which means that there is no need to construct a basic architecture from scratch. As a result, the simplified development process involves adding own crawlers, customising the reply procedure for pet scammers, and configuring API keys and data storage directories.
+
 
 
 
@@ -288,10 +250,8 @@ The system was built on an open-source, expandable scam-baiting mail server \cit
 
 
 \chapter{Conclusion}
-In conclusion, this project effectively combats the rise of online pet scams by employing an automated system designed to deplete scammers' resources and deter fraudulent activities. Over a four-week experimental phase, four robotic responders consistently engaged scammers, wasting at least a month of their time. Dozens of scammers continued to interact with the system even after the experiment concluded. This not only aids in scam prevention but also refines scam-baiting strategies, contributing valuable insights into the fight against non-delivery fraud and advance fee fraud.
-\\
 
-Besides, the future direction of this project may focus on integrating the script for filling non-delivery fraud websites with other systems that can classify fraudulent advertisements or websites. This could include the code for automatic detection of pet scam websites \cite{mehmedov_automated_2021}.
+
 
 
 
