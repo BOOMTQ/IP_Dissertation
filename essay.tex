@@ -17,6 +17,8 @@
 \captionsetup[figure]{labelformat=empty} % This disables automatic labelling of graphics
 \captionsetup[subfigure]{labelformat=empty} % This disables automatic labelling of graphics
 \usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+
 
 
 \begin{document}
@@ -34,7 +36,7 @@ I would like to express my special thanks to my supervisor, Dr Matthew Edwards, 
 I would also like to give my thanks to School of Engineering for inviting me into UoB Computer Science OpenAI Team, which reimburses me the cost of using the different APIs of OpenAI.
 \\
 \\
-Sign up for GitHub Student Developer Pack provides me free access to many useful tools, involving Maligun and Name.com. Appreciate the resources it provides!
+Sign up for GitHub Student Developer Pack provides me free access to many useful tools, involving \href{https://www.mailgun.com}{Maligun} and \href{https://www.name.com}{Name.com}. Appreciate the resources it provides!
 
 \makedecl
 
@@ -48,7 +50,7 @@ An ethics application for this project was reviewed and approved by the faculty 
 
 
 \chapter*{Supporting Technologies}
-I created my system based on an open-source GitHub repository from \url{https://github.com/an19352/scambaiter_back}. I extended and altered its code to fit my needs.
+I created my system based on an open-source GitHub repository from \url{https://github.com/an19352/scambaiter_back}. By extending and altering its code to fit my needs.
 \\
 \\
 I integrated two GPT models, specifically GPT-3.5-turbo-0125 and GPT-4-0125-preview, into my system via their APIs to ensure the functionality of an automatic email reply feature. One necessary API key was acquired and configured using the resources available at \url{https://openai.com/}.
@@ -86,6 +88,10 @@ GPT                 &:     & Generative Pre-Trained Transformer
 API/APIs            &:     & Application Programming Interface
 \\
 URL/url             &:     & Uniform Resource Locator
+\\
+UNIX/UNICS          &:     & UNiplexed Information Computing System
+\\
+DNS                 &:     & Domain Name System
 
 
 \end{tabular}
@@ -108,10 +114,10 @@ At this stage, most victims are almost trapped in pet scams. Scammers guide them
 The earlier data comes from a 2015 report by the Federal Trade Commission (FTC) in the United States, which recorded approximately 37,000 pet-related complaints \cite{better_business_bureau_bbb_2017}. The Better Business Bureau's (BBB) recent research indicates that, since 2017, pet scams have represented a quarter of online shopping fraud cases in the US, with the average yearly financial loss for victims continuing to rise \cite{better_business_bureau_bbb_2022}. Similar problems have been reported worldwide in recent years. For instance, Lloyds Bank in the UK noted a significant rise in pet scam complaints according to their released statistics \cite{lloyds_bank_fraudsters_2023}. Relevant research in Australia and Canada also reflects this trend \cite{better_business_bureau_bbb_2017}.
 \\
 
-Despite the above reports have revealed the mature modus operandi of pet scam gangs and their increasingly detrimental impact on society, pet scams have not received as much attention as other similar scams, such as romance scams. Current research and countermeasures are primarily focused on helping the public identify and prevent pet scams. This includes the reporting and searching functions provided by \url{www.ipata.org/pet-scams} and \url{www.petscams.com}, as well as \url{www.aa419.org}, which operates a fake website database. Moreover, there are some technical development projects, such as the development of \textit{Scammed Posts Detector} \cite{norazman_development_2014} and the research of \textit{Automated classification of pet scam websites} \cite{mehmedov_automated_2021}. However, there is still a lack of targeted research that can effectively defend and disrupt such scams.
+Despite the above reports have revealed the mature modus operandi of pet scam gangs and their increasingly detrimental impact on society, pet scams have not received as much attention as other similar scams, such as romance scams. Current research and countermeasures are primarily focused on helping the public identify and prevent pet scams. This includes the reporting and searching functions provided by \href{https://www.ipata.org/pet-scams}{IPATA} and \href{www.petscams.com}{Petscams}, as well as \href{www.aa419.org}{AA419}, which operates a fake website database. Moreover, there are some technical development projects, such as the development of \textit{Scammed Posts Detector} \cite{norazman_development_2014} and the research of \textit{Automated classification of pet scam websites} \cite{mehmedov_automated_2021}. However, there is still a lack of targeted research that can effectively defend and disrupt such scams.
 \\
 
-This article will further investigate the field of pet scams. Based on the current operational mode of pet scams, an automatic response system that disrupts pet scams has been developed. This system is built on the basis of an expandable Scam-baiting Mail Server \cite{an19352_an19352scambaiter_back_2023}, aiming to contribute to the resistance and disruption of pet scams. As part of the project, multiple web crawlers will be built to extract and process various data. This includes the homepage URLs and the contact form pages on pet scam websites, as well as the implementation of automatic form filling. On the other hand, the system also needs the functionality to send and receive emails, as scammers will initiate email contact after receiving the form application. By building our own mail server and formulating various response strategies, we will conduct a four-week experimental interaction with pet scammers. After the experiment, relevant information and data will be integrated and analysed to determine the most effective response strategy. Finally, the project results are discussed comprehensively in terms of the success rate of script execution and the response rate of emails. The project execution intends to provide the public with powerful anti-pet scam strategies directly. Additionally, the automatic form-filling script can be paired with other advertisement scam detectors, such as the \textit{Scam Detection in Online Classified Advertisements} developed by Hamad Alsaleh \cite{alsaleh_scam_2017}. This can further assist more researchers and anti-fraud organisations in understanding and combating online fraud.
+This article will further investigate the field of pet scams. Based on the current operational mode of pet scams, an automatic response system that disrupts pet scams has been developed. This system is built on the basis of an expandable Scam-baiting Mail Server \cite{an19352_an19352scambaiter_back_2023}, aiming to contribute to the resistance and disruption of pet scams. As part of the project, multiple web crawlers will be built to extract and process various data. This includes the homepage URLs and the contact form pages on pet scam websites, as well as the implementation of automatic form filling. On the other hand, the system also needs the functionality to send and receive emails, as scammers will initiate email contact after receiving the form application. By building our own mail server and formulating various response strategies, we will conduct an one-month experimental interaction with pet scammers. After the experiment, relevant information and data will be integrated and analysed to determine the most effective response strategy. Finally, the project results are discussed comprehensively in terms of the success rate of script execution and the response rate of emails. The project execution intends to provide the public with powerful anti-pet scam strategies directly. Additionally, the automatic form-filling script can be paired with other advertisement scam detectors, such as the \textit{Scam Detection in Online Classified Advertisements} developed by Hamad Alsaleh \cite{alsaleh_scam_2017}. This can further assist more researchers and anti-fraud organisations in understanding and combating online fraud.
 \\
 
 Therefore, the specific objectives of this project can be summarised as the following key points:
@@ -125,7 +131,7 @@ Therefore, the specific objectives of this project can be summarised as the foll
 
 \chapter{Technical Background}
 \section{Petscams.com}
-The data for pet scam websites in this study was sourced from a volunteer organisation called \url{Petscams.com}. This organisation operates a website, using the same domain name, to list fraudulent pet sales and shipping sites \cite{brady_fighting_2024}. \url{Petscams.com} is an effective and free platform offering a range of security services to alert the public about the danger of those websites. These services include victim reporting and comment systems, fraudulent website analysis, verification, classification, and continuous article updates. They also provide access of these data to law enforcement agencies to better disrupt and combat scammer activities. Beyond that, they have been a valuable resource for other researchers. For instance, their victim report system significantly contributed to a pet scam case study published in 2020 \cite{whittaker_understanding_2020}.
+The data for pet scam websites in this study was sourced from a volunteer organisation called \href{https://www.petscams.com}{Petscams}. This organisation operates a website, using the same domain name, to list fraudulent pet sales and shipping sites \cite{brady_fighting_2024}. \href{https://www.petscams.com}{Petscams.com} is an effective and free platform offering a range of security services to alert the public about the danger of those websites. These services include victim reporting and comment systems, fraudulent website analysis, verification, classification, and continuous article updates. They also provide access of these data to law enforcement agencies to better disrupt and combat scammer activities. Beyond that, they have been a valuable resource for other researchers. For instance, their victim report system significantly contributed to a pet scam case study published in 2020 \cite{whittaker_understanding_2020}.
 \\
 
 Figure 1 illustrates how articles on this website maintain consistent HTML structural features in the developer mode of the Chrome browser. It's clear to see each article is nested within an $<$article$>$ tag, which is part of the HTML5 semantic markup, used to define independent content modules on the website. Importantly, each article's title, which the suspected fraudulent domain information, is placed within the $<$h2$>$ tag. 
@@ -135,7 +141,7 @@ Furthermore, as shown in Figure 2 and Figure 3, the page layout across different
 \begin{figure}[!htb]
     \centering
     % First bigger subfig
-    \begin{subfigure}[b]{0.7\textwidth}
+    \begin{subfigure}[b]{0.8\textwidth}
         \includegraphics[width=\linewidth,height=0.28\textheight]{pic/figure1.png}
         \label{fig:petscams}
     \end{subfigure}
@@ -180,7 +186,7 @@ Sitemap: https://petscams.com/sitemap_index.xml
 \vspace{10pt}
 
 
-It can be seen that the configuration of the file is highly open. The rules specified by \url{www.petscams.com} permit all search engine crawlers to access all the content on the website, providing a solid foundation for the implementation of web scraping technologies.
+It can be seen that the configuration of the file is highly open. The rules specified by \href{https://www.petscams.com}{Petscams.com} permit all search engine crawlers to access all the content on the website, providing a solid foundation for the implementation of web scraping technologies.
 
 
 \section{Web Scraping}
@@ -237,10 +243,16 @@ The core requirement of this project is to effectively understand and generate n
 
 
 \chapter{Project Execution}
-\section{Building a Domain Mail Server}
+\section{Automatic Receipt of Inbound Emails}
+Due to the large amount of email correspondence generated when the system induces fraudsters, the demand for the domain mail server has become a primary issue. In this project, two domains called “liveonline.ninja” and “malabaka.social” were registered on \href{https://www.name.com}{Name.com}, which were used for the system's testing and experimental stages in turn. \href{https://www.mailgun.com}{Maligun.com}, as a scalable email sending platform, is a significant tool for executing this project. Under the guidance of the official documentation \cite{noauthor_domain_nodate}, two domains were added in Mailgun and configured the DNS records to track the key information of all email correspondence under the domain.
+\\
 
-
-
+As shown in Figure 4, the Logs page of Mailgun allows users to view and track all email content and their statuses under the specified domain within the past five days of communications. However, these log records are automatically deleted after five days. To ensure the 31-days experiment can proceed smoothly, a script named \texttt{email\_crawl.py} was created for automated retrieval and long-term storage of inbound emails. First, configure the Mailgun API key and the required domain name in the system. Then, use the \texttt{request.get()} method to batch transfer emails based on a customised time range and event status. Each email should be named according to its unique receiving time, represented by the Unix timestamp. To ensure readability of the archived email content, the program formats each inbound email by retaining only the title, body, sender, and recipient information. This information is finally stored in a separate JSON file.
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.85\linewidth,height=0.2\textheight]{pic/figure4.png}
+    \caption{Figure 4: Mailgun logs page of malabaka.social}
+\end{figure}
 
 
 \section{Implementation of Web Scraping}
@@ -258,10 +270,11 @@ Next, heuristic search will be used to retrieve the contact form pages that exis
 
 Some scam websites place the contact form directly on the main page instead of setting up a separate submission page. Since $<$form$>$ element is frequently used to initiate and nest form content \cite{noauthor_how_2024}, the script first checks for the existence of $<$form$>$ and common elements within it, like $<$input type = "email"$>$, on the main page. If these exist, the main page's URL is directly used as the target form page URL and stored in a JSON file. If these elements are not found on the homepage, the script continues to search for links containing specific keywords, such as "contact-us" or "reach-us". The form links related to these keywords are usually found in the $<$a href$>$ tag. Moreover, some scammers choose to put the form URL contained in the $<$a href$>$ tag in the $<$li$>$ tag instead of $<$form$>$. Thus, the code also includes keyword retrieval for this potential structure.
 
+\subsection{Automated Form-Filling}
 
 
 
-\section{Implementation of Email Automation Processing}
+\section{Implementation of Email Automation Responses}
 
 \subsection{Integrating Response Strategies}
 
