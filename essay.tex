@@ -18,7 +18,8 @@
 \captionsetup[subfigure]{labelformat=empty} % This disables automatic labelling of graphics
 \usepackage[utf8]{inputenc}
 \usepackage{hyperref}
-
+\usepackage{listings}
+\usepackage{fancyvrb}
 
 
 \begin{document}
@@ -121,7 +122,7 @@ The earlier data comes from a 2015 report by the Federal Trade Commission (FTC) 
 Despite the above reports have revealed the mature modus operandi of pet scam gangs and their increasingly detrimental impact on society, pet scams have not received as much attention as other similar scams, such as romance scams. Current research and countermeasures are primarily focused on helping the public identify and prevent pet scams. This includes the reporting and searching functions provided by \href{https://www.ipata.org/pet-scams}{IPATA} and \href{www.petscams.com}{Petscams}, as well as \href{www.aa419.org}{AA419}, which operates a fake website database. Moreover, there are some technical development projects, such as the development of \textit{Scammed Posts Detector} \cite{norazman_development_2014} and the research of \textit{Automated classification of pet scam websites} \cite{mehmedov_automated_2021}. However, there is still a lack of targeted research that can effectively defend and disrupt such scams.
 \\
 
-This article will further investigate the field of pet scams. Based on the current operational mode of pet scams, an automatic response system that disrupts pet scams has been developed. This system is built on the basis of an expandable Scam-baiting Mail Server \cite{an19352_an19352scambaiter_back_2023}, aiming to contribute to the resistance and disruption of pet scams. As part of the project, multiple web crawlers will be built to extract and process various data. This includes the homepage URLs and the contact form pages on pet scam websites, as well as the implementation of automatic form filling. On the other hand, the system also needs the functionality to send and receive emails, as scammers will initiate email contact after receiving the form application. By building our own mail server and formulating various response strategies, we will conduct an one-month experimental interaction with pet scammers. After the experiment, relevant information and data will be integrated and analysed to determine the most effective response strategy. Finally, the project results are discussed comprehensively in terms of the success rate of script execution and the response rate of emails. The project execution intends to provide the public with powerful anti-pet scam strategies directly. Additionally, the automatic form-filling script can be paired with other advertisement scam detectors, such as the \textit{Scam Detection in Online Classified Advertisements} developed by Hamad Alsaleh \cite{alsaleh_scam_2017}. This can further assist more researchers and anti-fraud organisations in understanding and combating online fraud.
+This article will further investigate the field of pet scams. Based on the current operational mode of pet scams, an automatic response system that disrupts pet scams has been developed. This system is built on the basis of an expandable Scam-baiting Mail Server \cite{an19352_an19352scambaiter_back_2023}, aiming to contribute to the resistance and disruption of pet scams. As part of the project, multiple web crawlers will be built to extract and process various data. This includes the homepage URLs and the contact form pages on pet scam websites, as well as the implementation of automatic form filling. On the other hand, the system also needs the functionality to send and receive emails, as scammers will initiate email contact after receiving the form application. Thus, we conducted a 31-day experimental interaction with pet scammers by constructing our own email server and devising various response strategies, namely Investigator, Newbie, Bargainer, and Impatient Consumer. After the experiment, relevant information and data will be integrated and analysed to determine the most effective response strategy. Finally, the project results are discussed comprehensively in terms of the success rate of script execution and the response rate of emails. The project execution intends to provide the public with powerful anti-pet scam strategies directly. Additionally, the automatic form-filling script can be paired with other advertisement scam detectors, such as the \textit{Scam Detection in Online Classified Advertisements} developed by Hamad Alsaleh \cite{alsaleh_scam_2017}. This can further assist more researchers and anti-fraud organisations in understanding and combating online fraud.
 \\
 
 Therefore, the specific objectives of this project can be summarised as the following key points:
@@ -139,21 +140,19 @@ The data for pet scam websites in this study was sourced from a volunteer organi
 \\
 
 Figure 1 illustrates how articles on this website maintain consistent HTML structural features in the developer mode of the Chrome browser. It's clear to see each article is nested within an $<$article$>$ tag, which is part of the HTML5 semantic markup, used to define independent content modules on the website. Importantly, each article's title, which the suspected fraudulent domain information, is placed within the $<$h2$>$ tag. 
-\\
-
-Furthermore, as shown in Figure 2 and Figure 3, the page layout across different articles is also remarkably uniform. Each article segments the key points and introductory content, ensuring information is presented clearly. The breakdown of each scam website in the article consists of four main parts - identity, review credibility, legality, and recommended next steps - for in-depth description and analysis. This thoughtful design considerably assists victims and researchers, in quickly and fully understanding the workings of pet scams.
-\begin{figure}[!htb]
+\begin{figure}[H]
     \centering
     % First bigger subfig
     \begin{subfigure}[b]{0.8\textwidth}
-        \includegraphics[width=\linewidth,height=0.28\textheight]{pic/figure1.png}
+        \includegraphics[width=\linewidth,height=0.285\textheight]{pic/figure1.png}
         \label{fig:petscams}
     \end{subfigure}
     \caption{Figure 1: Petscans.com in the developer mode}
     \label{fig:main1}
 \end{figure}
 
-\begin{figure}[!htb]\ContinuedFloat
+Furthermore, as shown in Figure 2 and Figure 3, the page layout across different articles is also remarkably uniform. Each article segments the key points and introductory content, ensuring information is presented clearly. The breakdown of each scam website in the article consists of four main parts - identity, review credibility, legality, and recommended next steps - for in-depth description and analysis. This thoughtful design considerably assists victims and researchers, in quickly and fully understanding the workings of pet scams.
+\begin{figure}[H]\ContinuedFloat
     \centering
     % Second subfig
     \begin{subfigure}[b]{0.45\textwidth}
@@ -174,24 +173,22 @@ Furthermore, as shown in Figure 2 and Figure 3, the page layout across different
 
 It is indicated that the function of ‘robots.txt’ is to tell search engines which URLs in the site are allowed for crawler access \cite{noauthor_robotstxt_nodate}. By visiting \url{https://petscams.com/robots.txt}, you can understand the scope of web crawling permissions set by the developers, and the text data returned in the page is as follows:
 \vspace{10pt}
-
 \noindent\hrule  
-\begin{verbatim}
+\begin{Verbatim}[fontsize=\small]
 # START YOAST BLOCK
 # ---------------------------
 User-agent: *
 Disallow:
-
 Sitemap: https://petscams.com/sitemap_index.xml
 # ---------------------------
 # END YOAST BLOCK
-\end{verbatim}
+\end{Verbatim}
 \hrule  
 \vspace{10pt}
 
 
 It can be seen that the configuration of the file is highly open. The rules specified by \href{https://www.petscams.com}{Petscams.com} permit all search engine crawlers to access all the content on the website, providing a solid foundation for the implementation of web scraping technologies.
-
+\\
 
 \section{Web Scraping}
 Compared to traditional manual data collection, web scraping can automatically retrieve unstructured data from a large amount of text such as HTML, then convert it into a structured format and store it locally \cite{khder_web_2021}. As Zhao stated \cite{zhao_web_2017}, the web scraping process mainly includes two parts: acquiring web resources and extracting specific information from the received data. The former refers to accessing the target webpage via the HTTP protocol, while the latter is to parse and extract the necessary data through automated scripts, and then save it in a specific format for further analysis. In this section, we will focus on discussing the most commonly used technology libraries when performing these two stages.
@@ -241,7 +238,7 @@ In response to the demand for generating a large number of emails, the conventio
 GPT, short for Generative Pre-Trained Transformer, has been extensively pre-trained on natural language data. It can predict and generate subsequent content after receiving text, images, or sound through the transformer \cite{3blue1brown_but_2024}. Since the release of the first GPT-1 version in June 2018, OpenAI has developed numerous models with various functions \cite{noauthor_openai_nodate}. For instance, the GPT series focuses on understanding and generating natural language or code; DALL·E specialises in image generation and editing; Whisper, a voice recognition model, and Jukebox is a music generation model. And these models are still being continuously updated and optimised.
 \\
 
-The core requirement of this project is to effectively understand and generate natural language text. In that case, the newly released GPT-3.5-turbo-0125 and GPT-4-0125-preview models both meet this requirement well. The processing capabilities of these two models have reached up to 60,000 tokens (approximately 45,000 English words) and 300,000 tokens (approximately 225,000 English words) per minute \cite{noauthor_openai_nodate}. This demonstrates that by integrating the API key into the system, adjusting both the necessary prompts and other parameters according to the code template provided by OpenAI \cite{noauthor_openai_nodate}, AI can automatically generate email content in batches using human language logic. Which will result in an efficient response speed and a natural interaction experience.
+The core requirement of this project is to effectively understand and generate natural language text. In this case, the newly released GPT-3.5-turbo-0125 and GPT-4-0125-preview models both meet this requirement well. The processing capabilities of these two models have reached up to 60,000 tokens (approximately 45,000 English words) and 300,000 tokens (approximately 225,000 English words) per minute, respectively. The latter can also reduce the "laziness" of the model not completing tasks \cite{noauthor_openai_nodate}. This demonstrates that by integrating the API key into the system, adjusting both the necessary prompts and other parameters according to the code template provided by OpenAI \cite{noauthor_openai_nodate}, AI can automatically generate email content in batches using human language logic. Which will result in an efficient response speed and a natural interaction experience.
 
 
 
@@ -281,17 +278,47 @@ After identifying the URL of a scam website's contact page, the system simulates
 In response to these challenges, I abandoned the traditional data recognition method limited to standardised forms and instead implemented a complex dictionary nesting structure \cite{noauthor_python_2023}. This approach enables the specification of detailed recognition rules for each form field, including element types, required attributes, and other common optional attributes. The library of recognition rules has been progressively refined through extensive examination and analysis of fraudulent forms. Meanwhile, the script utilises the FuzzyWuzzy library for fuzzy matching, with the matching threshold set at 90, thereby improving the accuracy of recognition. And the maximum search recursion depth is set to 2, which is sufficient for handling complex multi-level form structures. To enhance efficiency, caching and multi-threading technologies have been introduced, allowing simultaneous processing of different form elements, thereby optimising the utilisation of computing resources elegantly.
 \\
 
-In the process of auto-filling forms, it is crucial to maintain the reasonableness and randomness of data to prevent potential issues, such as bothering unrelated individuals. Personal details like names are randomly created by Python library called 'names', while email addresses are a combination of random strings and the preset domain name. Even pet names and species are randomly generated. When dealing with logically connected information like phone numbers, addresses, countries, and cities, consistency at the national level is maintained. By using counters and for-loops, the system assigns specific information of either the US or the UK to different forms, thus preventing data confusion within the same form. Moreover, the message board input utilises the GPT-3.5 language model and sequentially employs four strategies to engage scammers, ensuring balanced participation opportunities for responders with various personalities. For forms with drop-down selections and check-boxes, the script will automatically and randomly choose options after identifying labels such as "checkbox", "radio", or "select".
+In the process of auto-filling forms, it is crucial to maintain the reasonableness and randomness of data to prevent potential issues, such as bothering unrelated individuals. Personal details like names are randomly created by Python library called 'names', while email addresses are a combination of random strings and the preset domain name. Even pet names and species are randomly generated. When dealing with logically connected information like phone numbers, addresses, countries, and cities, consistency at the national level is maintained. By using counters and for-loops, the system assigns specific information of either the US or the UK to different forms, thus preventing data confusion within the same form. Furthermore, the message board input uses the GPT-3.5 language model and sequentially applies four common strategies to interact with scammers. This approach ensures equal participation opportunities for responders with different personalities. For forms with drop-down selections and check-boxes, the script will automatically and randomly choose options after identifying labels such as "checkbox", "radio", or "select".
 \\
 
 Next, \texttt{formfill\_crawl.py} uses Selenium to find and click the submit button, and to check if the form has been sent successfully. The program intercepts network requests of XMLHttpRequest through JavaScript code. It captures and analyses request data in real-time, specifically focusing on the status code and response content of POST requests. This helps to determine whether a form submission has been successful or not. If the network data is not enough to confirm that, the system look for other signs like "Thank you" or "success" on the web page. In the end, all important data collected during this process, including the name, email address, scam form URLs, and the time of form filling, are recorded to keep our operation stats up to date. By extracting and testing three sets of real scam forms using the "liveonline.ninja" domain name, the script achieved a success rate between 45\% and 60\%. Although this didn't meet an expected goal, it is adequate to support the subsequent experimental research needs for this project.
 
 
 \section{Implementation of Email Automation Responses}
-
 \subsection{Integrating Response Strategies}
+In the email automatic response phase, the system adopted four response strategies that were initially implemented in the message board function: Investigator, Newbie, Bargainer, and Impatient Consumer. These strategies were chosen based on a study of numerous online shopper personalities \cite{noauthor_types_nodate} and a thorough analysis of past pet scam cases \cite{whittaker_understanding_2020}. Our goal is to efficiently waste the time of pet scammers. Emails require dealing with more complex text compared to message boards. For this reason, we utilised GPT-4-0125-preview, the latest advanced text generation model, to satisfy the need for high-quality natural language generation.
+\\
 
+In order to safeguard response authenticity and privacy, our system uses regular expressions to eliminate confusing greetings from the start of emails. Also, the system has adjusted the key parameters of the generation model: \texttt{temperature} and \texttt{top\_p} to control the predictability and diversity of the output \cite{noauthor_openai_nodate}. For instance, we set higher values (0.6 and 0.7) for newbies and impatient consumers, enhancing reply naturalness. For bargainers and investigators, we use medium (0.5) and lower (0.3) values respectively, aligning with their communication styles. These adjustments within the GPT language model template \cite{sanders_how_2023} enable us to customise email reply strategies. Take the following code of the function investigator as an example:
+\vspace{10pt}
+\noindent\hrule 
+\lstset{
+  basicstyle=\small\ttfamily,
+  breaklines=true, 
+  showstringspaces=false,
+  tabsize=2,                  
+  columns=fullflexible, 
+}
 
+\begin{lstlisting}[language=Python]
+def investigator(prompt):
+    prompt = "Reply without any signature :" + prompt
+    completion = openai.ChatCompletion.create(
+        model="gpt-4-0125-preview",
+        messages=[
+            {"role": "system",
+            "content": "Act as an inquisitive investigator, seeking detailed evidence to confirm the pet sale's validity. Deny being a robot or causing trouble if questioned. Persist in the discussion, avoiding repeat questions and maintaining a logical flow with relevant follow-ups or new queries. If receiving attachments, don't open them and respond that you cannot open them. Maintain privacy and do not use any form of greeting or address such as 'Dear [name]' or 'Hi [name]'. But you should also make all your reply seem a little more humane."},
+            {"role": "user", "content": prompt}
+        ],
+        temperature=0.3,
+        top_p=0.3
+    )
+    res = completion.choices[0].message.content
+    res = re.sub(r"\[.*?\]", "", res)
+    return res.strip()
+\end{lstlisting}
+\hrule  
+\vspace{10pt}
 
 
 
