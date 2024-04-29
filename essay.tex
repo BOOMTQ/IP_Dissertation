@@ -25,7 +25,7 @@
 \begin{document}
 
 \maketitle
-\fronmatter
+% \fronmatter
 
 \chapter*{Abstract}
 This project targets the growing threat of online pet scams by creating an automated system to waste scammers' time and resources, aiding in scam identification and prevention. Following extensive development and testing, a four-week experimental deployment against pet scammers unveiled and refined effective scam-baiting tactics.
@@ -140,19 +140,19 @@ The data for pet scam websites in this study was sourced from a volunteer organi
 \\
 
 Figure 1 illustrates how articles on this website maintain consistent HTML structural features in the developer mode of the Chrome browser. It's clear to see each article is nested within an $<$article$>$ tag, which is part of the HTML5 semantic markup, used to define independent content modules on the website. Importantly, each article's title, which the suspected fraudulent domain information, is placed within the $<$h2$>$ tag. 
-\begin{figure}[H]
-    \centering
-    % First bigger subfig
-    \begin{subfigure}[b]{0.8\textwidth}
-        \includegraphics[width=\linewidth,height=0.285\textheight]{pic/figure1.png}
-        \label{fig:petscams}
-    \end{subfigure}
-    \caption{Figure 1: Petscans.com in the developer mode}
-    \label{fig:main1}
+\begin{figure}[h]
+\centering
+%     % First bigger subfig
+% \begin{subfigure}[b]{0.8\textwidth}
+\includegraphics[width=0.8\linewidth,height=0.285\textheight]{pic/figure1.png}
+% \label{fig:petscams}
+% \end{subfigure}
+\caption{Figure 1: Petscans.com in the developer mode}
+% \label{fig:main1}
 \end{figure}
 
 Furthermore, as shown in Figure 2 and Figure 3, the page layout across different articles is also remarkably uniform. Each article segments the key points and introductory content, ensuring information is presented clearly. The breakdown of each scam website in the article consists of four main parts - identity, review credibility, legality, and recommended next steps - for in-depth description and analysis. This thoughtful design considerably assists victims and researchers, in quickly and fully understanding the workings of pet scams.
-\begin{figure}[H]\ContinuedFloat
+\begin{figure}[h]\ContinuedFloat
     \centering
     % Second subfig
     \begin{subfigure}[b]{0.45\textwidth}
@@ -170,6 +170,7 @@ Furthermore, as shown in Figure 2 and Figure 3, the page layout across different
     \caption{Figure 2 (Homeafc.com) and Figure 3 (Homeafc.com)}
     \label{fig:main2}
 \end{figure}
+
 
 It is indicated that the function of ‘robots.txt’ is to tell search engines which URLs in the site are allowed for crawler access \cite{noauthor_robotstxt_nodate}. By visiting \url{https://petscams.com/robots.txt}, you can understand the scope of web crawling permissions set by the developers, and the text data returned in the page is as follows:
 \vspace{10pt}
@@ -249,10 +250,10 @@ Due to the large amount of email correspondence generated when the system induce
 \\
 
 As shown in Figure 4, the Logs page of Mailgun allows users to view and track all email content and their statuses under the specified domain within the past five days of communications. However, these log records are automatically deleted after five days. To ensure the 31-days experiment can proceed smoothly, a script named \texttt{email\_crawl.py} was created for automated retrieval and long-term storage of inbound emails. First, configure the Mailgun API key and the required domain name in the system. Then, use the \texttt{request.get()} method to batch transfer emails based on a customised time range and event status. Each email should be named according to its unique receiving time, represented by the Unix timestamp. To ensure readability of the archived email content, the program formats each inbound email by retaining only the title, body, sender, and recipient information. This information is finally stored in a separate JSON file.
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[width=0.85\linewidth,height=0.2\textheight]{pic/figure4.png}
-    \caption{Figure 4: Mailgun logs page of malabaka.social}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\linewidth,height=0.2\textheight]{pic/figure4.png}
+\caption{Figure 4: Mailgun logs page of malabaka.social}
 \end{figure}
 
 
@@ -285,7 +286,6 @@ Next, \texttt{formfill\_crawl.py} uses Selenium to find and click the submit but
 
 
 \section{Implementation of Email Automation Responses}
-\subsection{Integrating Response Strategies}
 In the email automatic response phase, the system adopted four response strategies that were initially implemented in the message board function: Investigator, Newbie, Bargainer, and Impatient Consumer. These strategies were chosen based on a study of numerous online shopper personalities \cite{noauthor_types_nodate} and a thorough analysis of past pet scam cases \cite{whittaker_understanding_2020}. Our goal is to efficiently waste the time of pet scammers. Emails require dealing with more complex text compared to message boards. For this reason, we utilised GPT-4-0125-preview, the latest advanced text generation model, to satisfy the need for high-quality natural language generation.
 \\
 
@@ -320,12 +320,27 @@ def investigator(prompt):
 \hrule  
 \vspace{10pt}
 
+The \texttt{corn.py} script is primarily used for centralised replies to batch emails. It parses emails collected by \texttt{email\_crawl.py}, generates appropriate reply text, and then uses the Mailgun module to send the email. To maintain a consistent and credible conversation, this script identifies the proper response strategy by searching the record from the previous script execution. This approach can avoid suspicion caused by sudden strategy changes. Each generated email uses formatting techniques, by simulating the ongoing conversation with "Re:" as the prefix, then adding the signature and username at the end to enhance the authenticity of the response.
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth, height=0.25\textheight]{pic/figure5.png}
+\caption{Figure 5: A scam email conversation for testing}
+\label{fig:pic5}
+\end{figure}
 
+As shown in Figure 5, the system acts as a "bargainer" in response to a test scam email delivered to the system domain via Gmail. Figure 6 provides detailed metadata of this email, validating the system's proficiency in handling nuanced communication tasks. It has revealed that the content matching and email format meet the test benchmark, effectively demonstrating the practicality of the script in real email exchanges. In order to prevent system overload and potential crashes, the script also sets a maximum limit on the number of emails and content tokens, thereby effectively managing the load. Simultaneously, it employs an exception-catching mechanism to avoid issues caused by errors.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\linewidth]{pic/figure6.png}
+\caption{Figure 6: Metadata of this response email}
+\label{fig:pic6}
+\end{figure}
 
 \section{Construction and Operation of the System}
-The system was built on an open-source, expandable scam-baiting mail server \cite{an19352_an19352scambaiter_back_2023}, which means that there is no need to construct a basic architecture from scratch. As a result, the simplified development process involves adding own crawlers, customising the reply procedure for pet scammers, and configuring API keys and data storage directories.
+The system was built on an open-source, expandable scam-baiting mail server \cite{an19352_an19352scambaiter_back_2023}, which eliminates the need to construct a basic architecture from scratch. The simplified development process involved integrating own crawlers, customising the reply procedure for pet scammers and configuring API keys along with data storage directories. Consequently, this section mainly focuses on how these pre-written programs are well organised into a complete system designed to disrupt pet scams.
+\\
 
-
+Despite comprehensive testing of all programs before the experiment's start, real-time error monitoring was vital to ensure an uninterrupted experiment. Instead of merging the five key scripts or enhancing their calling, they were managed and run separately within the project. However, there is an inherent link between these scripts, each producing data stored in JSON format in the system, ready for others to access. After eliminating two irrelevant crawlers and several email reply templates from the original email server, Figure 7 provides a clear view of the system architecture and operation process.
 
 
 \chapter{Analysis of results}
