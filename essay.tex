@@ -142,13 +142,9 @@ The data for pet scam websites in this study was sourced from a volunteer organi
 Figure 1 illustrates how articles on this website maintain consistent HTML structural features in the developer mode of the Chrome browser. It's clear to see each article is nested within an $<$article$>$ tag, which is part of the HTML5 semantic markup, used to define independent content modules on the website. Importantly, each article's title, which the suspected fraudulent domain information, is placed within the $<$h2$>$ tag. 
 \begin{figure}[h]
 \centering
-%     % First bigger subfig
-% \begin{subfigure}[b]{0.8\textwidth}
 \includegraphics[width=0.8\linewidth,height=0.285\textheight]{pic/figure1.png}
-% \label{fig:petscams}
-% \end{subfigure}
 \caption{Figure 1: Petscans.com in the developer mode}
-% \label{fig:main1}
+\label{fig:pic1}
 \end{figure}
 
 Furthermore, as shown in Figure 2 and Figure 3, the page layout across different articles is also remarkably uniform. Each article segments the key points and introductory content, ensuring information is presented clearly. The breakdown of each scam website in the article consists of four main parts - identity, review credibility, legality, and recommended next steps - for in-depth description and analysis. This thoughtful design considerably assists victims and researchers, in quickly and fully understanding the workings of pet scams.
@@ -158,16 +154,16 @@ Furthermore, as shown in Figure 2 and Figure 3, the page layout across different
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\linewidth]{pic/figure2.png}
         \caption{Figure 2: Scam - Homeafc.com}
-        \label{fig:sub2}
+        \label{fig:pic2}
     \end{subfigure}
     \hfill % Used to add some space between subgraphs
     % Third subfig
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\linewidth]{pic/figure3.png}
         \caption{Figure 3: Scam - Outwestschnauzers.com}
-        \label{fig:sub3}
+        \label{fig:pic3}
     \end{subfigure}
-    \caption{Figure 2 (Homeafc.com) and Figure 3 (Homeafc.com)}
+    \caption{Figure 2 and Figure 3}
     \label{fig:main2}
 \end{figure}
 
@@ -258,13 +254,13 @@ As shown in Figure 4, the Logs page of Mailgun allows users to view and track al
 
 
 \section{Implementation of Web Scraping}
-In this project, web scraping is primarily used to access, collect, and fill in a large amount of data on the form pages of pet scam websites. We have learned before that \url{www.petscams.com} is a key resource, dedicated to collecting and reporting information on scam websites related to pet sales and transportation. Given that pet transportation scams are often only involved in the later stages of scam activities, and these scam websites do not expect consumers to contact them proactively. Therefore, our crawlers will only focus on those fraudulent pet websites involved in sales.
+In this project, web scraping is primarily used to access, collect, and fill in a large amount of data on the form pages of pet scam websites. We have learned before that \href{www.petscams.com}{petscams.com} is a key resource, dedicated to collecting and reporting information on scam websites related to pet sales and transportation. Given that pet transportation scams are often only involved in the later stages of scam activities, and these scam websites do not expect consumers to contact them proactively. Therefore, our crawlers will only focus on those fraudulent pet websites involved in sales.
 
 \subsection{Crawling and Filtering List of Target Websites}
 The scraping process begins with \texttt{petscam\_crawl.py}, which targets fake pet sales websites on \url{https://petscams.com/category/puppy-scammer-list/}. It fetches HTML pages using the requests library and parses them with BeautifulSoup using 'html.parser'. The script identifies each $<$article$>$ tag, then uses the $<$time$>$ and $<$h2 class="main-title"$>$ tags within to filter articles by publication date and extract scam domain names.  Each extracted domain is automatically prefixed with 'https://' to ensure they are directly accessible.
 \\
 
-While randomly visiting some of the URLs reported in recent months, it was found that some of them have already expired or been suspended. This issue is more prevalent with scam domain names revealed earlier. As a result, the code includes checks for the return status code of the link and potential message prompts such as "Account Suspended" and "Maintenance mode is on". On the other hand, the administrators of \url{petscams.com} occasionally re-post the same websites, which can lead to duplicate links saved in the JSON list. Taking advantage of the characteristic that sets do not allow duplicate elements \cite{sturtz_sets_nodate}, all valid URLs are first stored in a set, then converted into a list format and stored in a JSON file. These strategies can effectively prevent the potential waste of time and decrease in accuracy that invalid or duplicate links could cause in the subsequent code execution process.
+While randomly visiting some of the URLs reported in recent months, it was found that some of them have already expired or been suspended. This issue is more prevalent with scam domain names revealed earlier. As a result, the code includes checks for the return status code of the link and potential message prompts such as "Account Suspended" and "Maintenance mode is on". On the other hand, the administrators of \href{www.petscams.com}{Petscams.com} occasionally re-post the same websites, which can lead to duplicate links saved in the JSON list. Taking advantage of the characteristic that sets do not allow duplicate elements \cite{sturtz_sets_nodate}, all valid URLs are first stored in a set, then converted into a list format and stored in a JSON file. These strategies can effectively prevent the potential waste of time and decrease in accuracy that invalid or duplicate links could cause in the subsequent code execution process.
 \\
 
 Next, heuristic search will be used to retrieve the contact form pages that exist in the website list collected in the previous step, which is done by a crawler program called \texttt{contactpage\_crawl.py}. Based on observations of a large number of pet scam sites, scammers usually set up a "Contact Us" page, guide people to leave their contact information, and thus get in touch with the victims separately. Through Chrome's developer mode, I summarised the three common structures they often use when developing this page, and wrote the code according to them.
@@ -340,7 +336,34 @@ As shown in Figure 5, the system acts as a "bargainer" in response to a test sca
 The system was built on an open-source, expandable scam-baiting mail server \cite{an19352_an19352scambaiter_back_2023}, which eliminates the need to construct a basic architecture from scratch. The simplified development process involved integrating own crawlers, customising the reply procedure for pet scammers and configuring API keys along with data storage directories. Consequently, this section mainly focuses on how these pre-written programs are well organised into a complete system designed to disrupt pet scams.
 \\
 
-Despite comprehensive testing of all programs before the experiment's start, real-time error monitoring was vital to ensure an uninterrupted experiment. Instead of merging the five key scripts or enhancing their calling, they were managed and run separately within the project. However, there is an inherent link between these scripts, each producing data stored in JSON format in the system, ready for others to access. After eliminating two irrelevant crawlers and several email reply templates from the original email server, Figure 7 provides a clear view of the system architecture and operation process.
+Despite comprehensive testing of all programs before the experiment's start, real-time error monitoring was vital to ensure an uninterrupted experiment. Instead of merging the five key scripts or enhancing their calling, they were managed and run separately within the project. However, there is an inherent link between these scripts, each producing data stored in JSON format in the system, ready for others to access. After eliminating two irrelevant crawlers and several email reply templates from the original email server, Figure 7 and Figure 8 clearly show the architecture and operation flow of the system during the two stages of web interaction and email interaction respectively.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{pic/figure7.png}
+\caption{Figure 7: Stage 1 - Web Interaction}
+\label{fig:pic7}
+\end{figure}
+
+\begin{figure}[H]\ContinuedFloat
+\centering
+\includegraphics[width=0.8\linewidth]{pic/figure8.png}
+\caption{Figure 8: Stage 2 - Email Interaction}
+\label{fig:pic8}
+\end{figure}
+
+Figure 7 illustrates the system's first stage workflow, specifically, the interaction process with pet scam pages. This flowchart clearly outlines each step, from initial crawling to data processing. Each step involves storing the URL crawling results, regardless of success. All data is saved in JSON format. The system also calculates the success rate of each script based on the number of successfully captured links and attempts, which is vital for monitoring and optimising the crawler's performance. The entire process's progression relies on accurately reading and processing valid data.
+\\
+
+Figure 8 shows the second stage of the email handling process, which involves processing emails from the Mailgun domain server. During this stage, all incoming scam emails are archived for future review and sorted into the processing queue. In addition, each email's recipient information is compared with the data in the \texttt{cache.json} file from the first stage. If the data matches, it means that the email originated from the form-filling activity in the first stage. Details from matched emails, such as the email address of scammers and the timestamp of the email, are automatically stored in the \texttt{record.json} file. This file also contains the reply strategy for deciding whether to reply to the email, which is executed through the corn.py script. After each reply to a new scammer, the \texttt{history.json} file is updated to track the usage frequency of various reply strategies.
+\\
+
+After finishing the coding and thorough testing of the project, I scheduled the experiment to start on March 15th (Friday) and end on April 15th. Regular visits to \href{www.petscams.com}{petscams.com} showed that the website updates approximately every 2-3 days, with each update publishing around 15 articles exposing fraudulent pet sales platforms. Given this pattern, and considering the success rate of \texttt{formfill\_crawler.py}, I divided the 31-day experiment into four cycles. Apart from the first Friday of the first week, when it was necessary to interact with pet scam pages exposed within the past 30 days, the following three Fridays required interactions with pages exposed within the past 7 days only. This approach ensured continuous communication with the scammers throughout the experiment and facilitated the collection of diverse data. Also, during the experiment, I needed to respond to new emails daily between 5pm and 7pm. Accounting for the 4-5 hour time difference, this time corresponds to 12pm to 3pm Eastern Time in the United States, a period of high activity for Americans. In the previous text, we have already learned that the United States is not only one of the first countries to expose online pet scams but also the country where these scams occur most frequently. Therefore, sending emails during this time period increases the likelihood of timely responses, even from scammers located in Europe. More detailed information about the experimental process is shown in Figure 9.
+\begin{figure}[H]\ContinuedFloat
+\centering
+\includegraphics[width=\linewidth]{pic/figure9.png}
+\caption{Figure 9: The Process of Experiment}
+\label{fig:pic9}
+\end{figure}
 
 
 \chapter{Analysis of results}
