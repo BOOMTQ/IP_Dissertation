@@ -15,11 +15,14 @@
 \usepackage[list=true]{subcaption}
 \usepackage{caption}
 \captionsetup[figure]{labelformat=empty} % This disables automatic labelling of graphics
-\captionsetup[subfigure]{labelformat=empty} % This disables automatic labelling of graphics
+\captionsetup[table]{labelformat=empty} % This disables automatic labelling of tables
 \usepackage[utf8]{inputenc}
 \usepackage{hyperref}
 \usepackage{listings}
 \usepackage{fancyvrb}
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{graphicx}
 
 
 \begin{document}
@@ -140,7 +143,7 @@ The data for pet scam websites in this study was sourced from a volunteer organi
 \\
 
 Figure 1 illustrates how articles on this website maintain consistent HTML structural features in the developer mode of the Chrome browser. It's clear to see each article is nested within an $<$article$>$ tag, which is part of the HTML5 semantic markup, used to define independent content modules on the website. Importantly, each article's title, which the suspected fraudulent domain information, is placed within the $<$h2$>$ tag. 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\linewidth,height=0.285\textheight]{pic/figure1.png}
 \caption{Figure 1: Petscans.com in the developer mode}
@@ -148,23 +151,19 @@ Figure 1 illustrates how articles on this website maintain consistent HTML struc
 \end{figure}
 
 Furthermore, as shown in Figure 2 and Figure 3, the page layout across different articles is also remarkably uniform. Each article segments the key points and introductory content, ensuring information is presented clearly. The breakdown of each scam website in the article consists of four main parts - identity, review credibility, legality, and recommended next steps - for in-depth description and analysis. This thoughtful design considerably assists victims and researchers, in quickly and fully understanding the workings of pet scams.
-\begin{figure}[h]\ContinuedFloat
+\begin{figure}[H]
     \centering
-    % Second subfig
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{minipage}{0.45\textwidth}\ContinuedFloat
         \includegraphics[width=\linewidth]{pic/figure2.png}
-        \caption{Figure 2: Scam - Homeafc.com}
+        \caption{Figure 2: Homeafc.com}
         \label{fig:pic2}
-    \end{subfigure}
-    \hfill % Used to add some space between subgraphs
-    % Third subfig
-    \begin{subfigure}[b]{0.45\textwidth}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}\ContinuedFloat
         \includegraphics[width=\linewidth]{pic/figure3.png}
-        \caption{Figure 3: Scam - Outwestschnauzers.com}
+        \caption{Figure 3: Outwestschnauzers.com}
         \label{fig:pic3}
-    \end{subfigure}
-    \caption{Figure 2 and Figure 3}
-    \label{fig:main2}
+    \end{minipage}
 \end{figure}
 
 
@@ -246,7 +245,7 @@ Due to the large amount of email correspondence generated when the system induce
 \\
 
 As shown in Figure 4, the Logs page of Mailgun allows users to view and track all email content and their statuses under the specified domain within the past five days of communications. However, these log records are automatically deleted after five days. To ensure the 31-days experiment can proceed smoothly, a script named \texttt{email\_crawl.py} was created for automated retrieval and long-term storage of inbound emails. First, configure the Mailgun API key and the required domain name in the system. Then, use the \texttt{request.get()} method to batch transfer emails based on a customised time range and event status. Each email should be named according to its unique receiving time, represented by the Unix timestamp. To ensure readability of the archived email content, the program formats each inbound email by retaining only the title, body, sender, and recipient information. This information is finally stored in a separate JSON file.
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.85\linewidth,height=0.2\textheight]{pic/figure4.png}
 \caption{Figure 4: Mailgun logs page of malabaka.social}
@@ -317,7 +316,7 @@ def investigator(prompt):
 \vspace{10pt}
 
 The \texttt{corn.py} script is primarily used for centralised replies to batch emails. It parses emails collected by \texttt{email\_crawl.py}, generates appropriate reply text, and then uses the Mailgun module to send the email. To maintain a consistent and credible conversation, this script identifies the proper response strategy by searching the record from the previous script execution. This approach can avoid suspicion caused by sudden strategy changes. Each generated email uses formatting techniques, by simulating the ongoing conversation with "Re:" as the prefix, then adding the signature and username at the end to enhance the authenticity of the response.
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth, height=0.25\textheight]{pic/figure5.png}
 \caption{Figure 5: A scam email conversation for testing}
@@ -351,7 +350,7 @@ Despite comprehensive testing of all programs before the experiment's start, rea
 \label{fig:pic8}
 \end{figure}
 
-Figure 7 illustrates the system's first stage workflow, specifically, the interaction process with pet scam pages. This flowchart clearly outlines each step, from initial crawling to data processing. Each step involves storing the URL crawling results, regardless of success. All data is saved in JSON format. The system also calculates the success rate of each script based on the number of successfully captured links and attempts, which is vital for monitoring and optimising the crawler's performance. The entire process's progression relies on accurately reading and processing valid data.
+Figure 7 illustrates the system's first stage workflow, specifically, the interaction process with pet scam pages. This flowchart clearly outlines each step, from initial crawling to data processing. Each step involves storing the URL crawling results, and all the data is saved in JSON file format. The system also calculates the success rate of each script based on the number of successfully captured links and attempts, which is vital for monitoring and optimising the crawler's performance. The entire process's progression relies on accurately reading and processing valid data.
 \\
 
 Figure 8 shows the second stage of the email handling process, which involves processing emails from the Mailgun domain server. During this stage, all incoming scam emails are archived for future review and sorted into the processing queue. In addition, each email's recipient information is compared with the data in the \texttt{cache.json} file from the first stage. If the data matches, it means that the email originated from the form-filling activity in the first stage. Details from matched emails, such as the email address of scammers and the timestamp of the email, are automatically stored in the \texttt{record.json} file. This file also contains the reply strategy for deciding whether to reply to the email, which is executed through the corn.py script. After each reply to a new scammer, the \texttt{history.json} file is updated to track the usage frequency of various reply strategies.
@@ -367,6 +366,83 @@ After finishing the coding and thorough testing of the project, I scheduled the 
 
 
 \chapter{Analysis of results}
+\section{Script Performance Analysis}
+\subsection{Performance of Scam Page Interaction Scripts}
+As the experiment progressed, the system automatically logged execution data for each script, including duration and success rate. This data is summarised in Table 1, which clearly illustrates the performance of the three scripts responsible for interaction with pet scam pages.
+{\small
+\begin{table}[ht]
+\centering
+\label{tab:performance}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{@{}ccccccc@{}}
+\toprule
+\textbf{Date} & \textbf{Script Name} & \textbf{Duration (s)} & \textbf{Scraped Links} & \textbf{Attempted Links} & \textbf{Success Rate (\%)} & \textbf{Avg Time Per Link (s)} \\
+\midrule
+Mar 15 & contactpage\_crawl & 386 & 325 & 334 & 97.3\% & 1.16 \\
+Mar 22 & contactpage\_crawl & 53 & 42 & 42 & 100.0\% & 1.26 \\
+Mar 29 & contactpage\_crawl & 51 & 44 & 45 & 97.8\% & 1.13 \\
+Apr 5 & contactpage\_crawl & 65 & 43 & 44 & 97.7\% & 1.48 \\
+Mar 15 & petscam\_crawl & 702 & 334 & 334 & 100.0\% & 2.10 \\
+Mar 22 & petscam\_crawl & 97 & 42 & 42 & 100.0\% & 2.31 \\
+Mar 29 & petscam\_crawl & 104 & 45 & 45 & 100.0\% & 2.31 \\
+Apr 5 & petscam\_crawl & 110 & 44 & 44 & 100.0\% & 2.50 \\
+Mar 15 & formfill\_crawl & 9254 & 146 & 325 & 44.9\% & 28.47 \\
+Mar 22 & formfill\_crawl & 1587 & 19 & 44 & 69.0\% & 37.79 \\
+Mar 29 & formfill\_crawl & 1373 & 27 & 44 & 61.4\% & 31.20 \\
+Apr 5 & formfill\_crawl & 1445 & 22 & 43 & 51.2\% & 33.60 \\
+\bottomrule
+\end{tabular}
+}
+\caption{Table 1: Summary of script performance metrics}
+\end{table}
+} 
+
+The table also contains the average processing time of the script on links, which is determined by dividing the duration by the number of attempted links. This directly shows the efficiency of each script. In particular, \texttt{petscam\_crawl.py} maintained a 100\% success rate throughout the experiment. This was due to the regular structure of the target website, \href{www.petscams.com}{Petscams.com}, and our script being tailored to this structure. Similarly, \texttt{contactpage\_crawl.py} also achieved a high success rate of over 97\%, with efficiency twice that of \texttt{petscam\_crawl}. The occasional link capture failures were mainly due to non-English interface websites, absence of key positioning words, or the lack of the contact page on some scam websites.
+\\
+
+Compared to the first two, \texttt{formfill\_crawl.py} performs less effectively, with a success rate of only 44.9\%-69\%. However, this is relatively similar to the 45\%-65\% result obtained by the same script during the test phase. Regarding the reasons for the form auto-filling failures, my collection and analysis of the failed pages during the experiment led to the following conclusions:
+\begin{itemize}
+  \item Unable to pass the robot verification on several websites, which is a problem that most auto-fill scripts still cannot solve.
+  \item Some websites may not accept mobile numbers containing special symbols, such as the plus sign (+). However, the mobile phone information that the system can automatically fill in always starts with the US country code +1 or the UK country code +44.
+  \item The script has certain technical limitations when dealing with forms that contain multiple similar required fields. For instance, as the form shown in Figure 10, even though both 'First' and 'Last' fields under 'Name' are mandatory, the script struggles to fill in another field after recognising and filling one with a matching name attribute.
+  \item Unpredictable special text requirements can also lead to auto-filling failures. For example, the unfilled text boxes in Figure 11 are due to the script not being pre-set to recognise such special long sentence information.
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \includegraphics[width=\linewidth]{pic/figure10.png}
+        \caption{Figure 10 - Incomplete 'Name' Field Error}
+    \end{minipage}
+    \hfill 
+    \begin{minipage}{0.45\textwidth}\ContinuedFloat
+        \includegraphics[width=\linewidth, height=0.3\textheight]{pic/figure11.png}
+        \caption{Figure 11 - Unrecognised Text Error in Form}
+    \end{minipage}
+\end{figure}
+
+The problem mentioned above was identified on the first day of the experiment. At that time, I considered potential solutions, such as enhancing the heuristic algorithm to recognise and fill more elements or even replacing it with a deep learning algorithm for graphical forms. However, I was cautious about introducing unpredictable changes that could potentially cause more issues, so I did not modify the relevant code. Additionally, Table 1 indicates that the average processing time for automatic form filling is quite long. Particularly on March 22\textsuperscript{nd}, it took an average of 37.79 seconds to process a link, even though it had the highest success rate on that day. In fact, this slower speed can be anticipated, as the complexity of this script code is significantly greater than the first two. Factors such as the recognition of a large, nested dictionary structure, multi-level recursive searches, and the time required for submission checks all contribute to its efficiency. Moreover, the impact of the network environment each time the script is executed should also be considered. Therefore, such fluctuations in processing time are reasonable.
+\\
+
+Even though the success rate and efficiency of \texttt{formfill\_crawler} are not very ideal, each respondent has made a sufficient number of submissions as shown in Table 2 during form filling. In this way, they are more likely to get equal participation opportunities in subsequent email replies. Overall, the same script exhibits minimal error in the running data across different experimental cycles. This demonstrates a consistent correlation and stability between the success rate and processing time, indicating that the script is approaching maturity.
+\begin{table}[ht]
+\centering
+\label{tab:ai_messages}
+\begin{tabular}{@{}lc@{}}
+\toprule
+\textbf{AI Responder} & \textbf{Submission Count} \\
+\midrule
+Investigator & 67 \\
+Newbie & 57 \\
+Bargainer & 59 \\
+Impatient Consumer & 54 \\
+\bottomrule
+\end{tabular}
+\caption{Table 2: Number of form submissions by each AI responder}
+\end{table}
+
+\subsection{Performance of Email Handling Scripts}
+
+
 
 
 
