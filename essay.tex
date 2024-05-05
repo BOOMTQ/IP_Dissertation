@@ -14,8 +14,8 @@
 \usepackage{float}
 \usepackage[list=true]{subcaption}
 \usepackage{caption}
-\captionsetup[figure]{labelformat=empty} % This disables automatic labelling of graphics
-\captionsetup[table]{labelformat=empty} % This disables automatic labelling of tables
+% \captionsetup[figure]{labelformat=empty} % This disables automatic labelling of graphics
+% \captionsetup[table]{labelformat=empty} % This disables automatic labelling of tables
 \usepackage[utf8]{inputenc}
 \usepackage{hyperref}
 \usepackage{listings}
@@ -142,26 +142,26 @@ Therefore, the specific objectives of this project can be summarised as the foll
 The data for pet scam websites in this study was sourced from a volunteer organisation called \href{https://www.petscams.com}{Petscams}. This organisation operates a website, using the same domain name, to list fraudulent pet sales and shipping sites \cite{brady_fighting_2024}. \href{https://www.petscams.com}{Petscams.com} is an effective and free platform offering a range of security services to alert the public about the danger of those websites. These services include victim reporting and comment systems, fraudulent website analysis, verification, classification, and continuous article updates. They also provide access of these data to law enforcement agencies to better disrupt and combat scammer activities. Beyond that, they have been a valuable resource for other researchers. For instance, their victim report system significantly contributed to a pet scam case study published in 2020 \cite{whittaker_understanding_2020}.
 \\
 
-Figure 1 illustrates how articles on this website maintain consistent HTML structural features in the developer mode of the Chrome browser. It's clear to see each article is nested within an $<$article$>$ tag, which is part of the HTML5 semantic markup, used to define independent content modules on the website. Importantly, each article's title, which the suspected fraudulent domain information, is placed within the $<$h2$>$ tag. 
+Figure \ref{fig:pic1} illustrates how articles on this website maintain consistent HTML structural features in the developer mode of the Chrome browser. It's clear to see each article is nested within an $<$article$>$ tag, which is part of the HTML5 semantic markup, used to define independent content modules on the website. Importantly, each article's title, which the suspected fraudulent domain information, is placed within the $<$h2$>$ tag. 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\linewidth,height=0.285\textheight]{pic/figure1.png}
-\caption{Figure 1: Petscans.com in the developer mode}
+\caption{Petscans.com in the developer mode}
 \label{fig:pic1}
 \end{figure}
 
-Furthermore, as shown in Figure 2 and Figure 3, the page layout across different articles is also remarkably uniform. Each article segments the key points and introductory content, ensuring information is presented clearly. The breakdown of each scam website in the article consists of four main parts - identity, review credibility, legality, and recommended next steps - for in-depth description and analysis. This thoughtful design considerably assists victims and researchers, in quickly and fully understanding the workings of pet scams.
+Furthermore, as shown in Figure \ref{fig:pic2} and Figure \ref{fig:pic3}, the page layout across different articles is also remarkably uniform. Each article segments the key points and introductory content, ensuring information is presented clearly. The breakdown of each scam website in the article consists of four main parts - identity, review credibility, legality, and recommended next steps - for in-depth description and analysis. This thoughtful design considerably assists victims and researchers, in quickly and fully understanding the workings of pet scams.
 \begin{figure}[H]
     \centering
-    \begin{minipage}{0.45\textwidth}\ContinuedFloat
+    \begin{minipage}{0.45\textwidth}
         \includegraphics[width=\linewidth]{pic/figure2.png}
-        \caption{Figure 2: Homeafc.com}
+        \caption{Homeafc.com}
         \label{fig:pic2}
     \end{minipage}
     \hfill
-    \begin{minipage}{0.45\textwidth}\ContinuedFloat
+    \begin{minipage}{0.45\textwidth}
         \includegraphics[width=\linewidth]{pic/figure3.png}
-        \caption{Figure 3: Outwestschnauzers.com}
+        \caption{Outwestschnauzers.com}
         \label{fig:pic3}
     \end{minipage}
 \end{figure}
@@ -244,11 +244,12 @@ The core requirement of this project is to effectively understand and generate n
 Due to the large amount of email correspondence generated when the system induces fraudsters, the demand for the domain mail server has become a primary issue. In this project, two domains called “liveonline.ninja” and “malabaka.social” were registered on \href{https://www.name.com}{Name.com}, which were used for the system's testing and experimental stages in turn. \href{https://www.mailgun.com}{Maligun.com}, as a scalable email sending platform, is a significant tool for executing this project. Under the guidance of the official documentation \cite{noauthor_domain_nodate}, two domains were added in Mailgun and configured the DNS records to track the key information of all email correspondence under the domain.
 \\
 
-As shown in Figure 4, the Logs page of Mailgun allows users to view and track all email content and their statuses under the specified domain within the past five days of communications. However, these log records are automatically deleted after five days. To ensure the 31-days experiment can proceed smoothly, a script named \texttt{email\_crawl.py} was created for automated retrieval and long-term storage of inbound emails. First, configure the Mailgun API key and the required domain name in the system. Then, use the \texttt{request.get()} method to batch transfer emails based on a customised time range and event status. Each email should be named according to its unique receiving time, represented by the Unix timestamp. To ensure readability of the archived email content, the program formats each inbound email by retaining only the title, body, sender, and recipient information. This information is finally stored in a separate JSON file.
+As shown in Figure \ref{fig:pic4}, the Logs page of Mailgun allows users to view and track all email content and their statuses under the specified domain within the past five days of communications. However, these log records are automatically deleted after five days. To ensure the 31-days experiment can proceed smoothly, a script named \texttt{email\_crawl.py} was created for automated retrieval and long-term storage of inbound emails. First, configure the Mailgun API key and the required domain name in the system. Then, use the \texttt{request.get()} method to batch transfer emails based on a customised time range and event status. Each email should be named according to its unique receiving time, represented by the Unix timestamp. To ensure readability of the archived email content, the program formats each inbound email by retaining only the title, body, sender, and recipient information. This information is finally stored in a separate JSON file.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.85\linewidth,height=0.2\textheight]{pic/figure4.png}
-\caption{Figure 4: Mailgun logs page of malabaka.social}
+\caption{Mailgun logs page of malabaka.social}
+\label{fig:pic4}
 \end{figure}
 
 
@@ -319,15 +320,15 @@ The \texttt{corn.py} script is primarily used for centralised replies to batch e
 \begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth, height=0.25\textheight]{pic/figure5.png}
-\caption{Figure 5: A scam email conversation for testing}
+\caption{A scam email conversation for testing}
 \label{fig:pic5}
 \end{figure}
 
-As shown in Figure 5, the system acts as a "bargainer" in response to a test scam email delivered to the system domain via Gmail. Figure 6 provides detailed metadata of this email, validating the system's proficiency in handling nuanced communication tasks. It has revealed that the content matching and email format meet the test benchmark, effectively demonstrating the practicality of the script in real email exchanges. In order to prevent system overload and potential crashes, the script also sets a maximum limit on the number of emails and content tokens, thereby effectively managing the load. Simultaneously, it employs an exception-catching mechanism to avoid issues caused by errors.
+As shown in Figure \ref{fig:pic5}, the system acts as a "bargainer" in response to a test scam email delivered to the system domain via Gmail. Figure \ref{fig:pic6} provides detailed metadata of this email, validating the system's proficiency in handling nuanced communication tasks. It has revealed that the content matching and email format meet the test benchmark, effectively demonstrating the practicality of the script in real email exchanges. In order to prevent system overload and potential crashes, the script also sets a maximum limit on the number of emails and content tokens, thereby effectively managing the load. Simultaneously, it employs an exception-catching mechanism to avoid issues caused by errors.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.4\linewidth]{pic/figure6.png}
-\caption{Figure 6: Metadata of this response email}
+\caption{Metadata of this response email}
 \label{fig:pic6}
 \end{figure}
 
@@ -335,32 +336,32 @@ As shown in Figure 5, the system acts as a "bargainer" in response to a test sca
 The system was built on an open-source, expandable scam-baiting mail server \cite{an19352_an19352scambaiter_back_2023}, which eliminates the need to construct a basic architecture from scratch. The simplified development process involved integrating own crawlers, customising the reply procedure for pet scammers and configuring API keys along with data storage directories. Consequently, this section mainly focuses on how these pre-written programs are well organised into a complete system designed to disrupt pet scams.
 \\
 
-Despite comprehensive testing of all programs before the experiment's start, real-time error monitoring was vital to ensure an uninterrupted experiment. Instead of merging the five key scripts or enhancing their calling, they were managed and run separately within the project. However, there is an inherent link between these scripts, each producing data stored in JSON format in the system, ready for others to access. After eliminating two irrelevant crawlers and several email reply templates from the original email server, Figure 7 and Figure 8 clearly show the architecture and operation flow of the system during the two stages of web interaction and email interaction respectively.
+Despite comprehensive testing of all programs before the experiment's start, real-time error monitoring was vital to ensure an uninterrupted experiment. Instead of merging the five key scripts or enhancing their calling, they were managed and run separately within the project. However, there is an inherent link between these scripts, each producing data stored in JSON format in the system, ready for others to access. After eliminating two irrelevant crawlers and several email reply templates from the original email server, Figure \ref{fig:pic7} and Figure \ref{fig:pic8} clearly show the architecture and operation flow of the system during the two stages of web interaction and email interaction respectively.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\linewidth]{pic/figure7.png}
-\caption{Figure 7: Stage 1 - Web Interaction}
+\caption{Stage 1 - Web Interaction}
 \label{fig:pic7}
 \end{figure}
 
-\begin{figure}[H]\ContinuedFloat
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\linewidth]{pic/figure8.png}
-\caption{Figure 8: Stage 2 - Email Interaction}
+\caption{Stage 2 - Email Interaction}
 \label{fig:pic8}
 \end{figure}
 
-Figure 7 illustrates the system's first stage workflow, specifically, the interaction process with pet scam pages. This flowchart clearly outlines each step, from initial crawling to data processing. Each step involves storing the URL crawling results, and all the data is saved in JSON file format. The system also calculates the success rate of each script based on the number of successfully captured links and attempts, which is vital for monitoring and optimising the crawler's performance. The entire process's progression relies on accurately reading and processing valid data.
+Figure \ref{fig:pic7} illustrates the system's first stage workflow, specifically, the interaction process with pet scam pages. This flowchart clearly outlines each step, from initial crawling to data processing. Each step involves storing the URL crawling results, and all the data is saved in JSON file format. The system also calculates the success rate of each script based on the number of successfully captured links and attempts, which is vital for monitoring and optimising the crawler's performance. The entire process's progression relies on accurately reading and processing valid data.
 \\
 
-Figure 8 shows the second stage of the email handling process, which involves processing emails from the Mailgun domain server. During this stage, all incoming scam emails are archived for future review and sorted into the processing queue. In addition, each email's recipient information is compared with the data in the \texttt{cache.json} file from the first stage. If the data matches, it means that the email originated from the form-filling activity in the first stage. Details from matched emails, such as the email address of scammers and the timestamp of the email, are automatically stored in the \texttt{record.json} file. This file also contains the reply strategy for deciding whether to reply to the email, which is executed through the corn.py script. After each reply to a new scammer, the \texttt{history.json} file is updated to track the usage frequency of various reply strategies.
+Figure \ref{fig:pic8} shows the second stage of the email handling process, which involves processing emails from the Mailgun domain server. During this stage, all incoming scam emails are archived for future review and sorted into the processing queue. In addition, each email's recipient information is compared with the data in the \texttt{cache.json} file from the first stage. If the data matches, it means that the email originated from the form-filling activity in the first stage. Details from matched emails, such as the email address of scammers and the timestamp of the email, are automatically stored in the \texttt{record.json} file. This file also contains the reply strategy for deciding whether to reply to the email, which is executed through the corn.py script. After each reply to a new scammer, the \texttt{history.json} file is updated to track the usage frequency of various reply strategies.
 \\
 
-After finishing the coding and thorough testing of the project, I scheduled the experiment to start on March 15th (Friday) and end on April 15th. Regular visits to \href{www.petscams.com}{petscams.com} showed that the website updates approximately every 2-3 days, with each update publishing around 15 articles exposing fraudulent pet sales platforms. Given this pattern, and considering the success rate of \texttt{formfill\_crawler.py}, I divided the 31-day experiment into four cycles. Apart from the first Friday of the first week, when it was necessary to interact with pet scam pages exposed within the past 30 days, the following three Fridays required interactions with pages exposed within the past 7 days only. This approach ensured continuous communication with the scammers throughout the experiment and facilitated the collection of diverse data. Also, during the experiment, I needed to respond to new emails daily between 5pm and 7pm. Accounting for the 4-5 hour time difference, this time corresponds to 12pm to 3pm Eastern Time in the United States, a period of high activity for Americans. In the previous text, we have already learned that the United States is not only one of the first countries to expose online pet scams but also the country where these scams occur most frequently. Therefore, sending emails during this time period increases the likelihood of timely responses, even from scammers located in Europe. More detailed information about the experimental process is shown in Figure 9.
-\begin{figure}[H]\ContinuedFloat
+After finishing the coding and thorough testing of the project, I scheduled the experiment to start on March 15th (Friday) and end on April 15th. Regular visits to \href{www.petscams.com}{petscams.com} showed that the website updates approximately every 2-3 days, with each update publishing around 15 articles exposing fraudulent pet sales platforms. Given this pattern, and considering the success rate of \texttt{formfill\_crawler.py}, I divided the 31-day experiment into four cycles. Apart from the first Friday of the first week, when it was necessary to interact with pet scam pages exposed within the past 30 days, the following three Fridays required interactions with pages exposed within the past 7 days only. This approach ensured continuous communication with the scammers throughout the experiment and facilitated the collection of diverse data. Also, during the experiment, I needed to respond to new emails daily between 5pm and 7pm. Accounting for the 4-5 hour time difference, this time corresponds to 12pm to 3pm Eastern Time in the United States, a period of high activity for Americans. In the previous text, we have already learned that the United States is not only one of the first countries to expose online pet scams but also the country where these scams occur most frequently. Therefore, sending emails during this time period increases the likelihood of timely responses, even from scammers located in Europe. More detailed information about the experimental process is shown in Figure \ref{fig:pic9}.
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{pic/figure9.png}
-\caption{Figure 9: The Process of Experiment}
+\caption{The Process of Experiment}
 \label{fig:pic9}
 \end{figure}
 
@@ -368,7 +369,7 @@ After finishing the coding and thorough testing of the project, I scheduled the 
 \chapter{Analysis of results}
 \section{Script Performance Analysis}
 \subsection{Performance of Scam Page Interaction Scripts}
-As the experiment progressed, the system automatically logged execution data for each script, including duration and success rate. This data is summarised in Table 1, which clearly illustrates the performance of the three scripts responsible for interaction with pet scam pages.
+As the experiment progressed, the system automatically logged execution data for each script, including duration and success rate. This data is summarised in Table \ref{tab:table1}, which clearly illustrates the performance of the three scripts responsible for interaction with pet scam pages.
 {\small
 \begin{table}[ht]
 \centering
@@ -393,7 +394,8 @@ Apr 5 & formfill\_crawl & 1445 & 22 & 43 & 51.2\% & 33.60 \\
 \bottomrule
 \end{tabular}
 }
-\caption{Table 1: Summary of script performance metrics}
+\caption{Summary of script performance metrics}
+\label{tab:table1}
 \end{table}
 } 
 
@@ -404,26 +406,28 @@ Compared to the first two, \texttt{formfill\_crawl.py} performs less effectively
 \begin{itemize}
   \item Unable to pass the robot verification on several websites, which is a problem that most auto-fill scripts still cannot solve.
   \item Some websites may not accept mobile numbers containing special symbols, such as the plus sign (+). However, the mobile phone information that the system can automatically fill in always starts with the US country code +1 or the UK country code +44.
-  \item The script has certain technical limitations when dealing with forms that contain multiple similar required fields. For instance, as the form shown in Figure 10, even though both 'First' and 'Last' fields under 'Name' are mandatory, the script struggles to fill in another field after recognising and filling one with a matching name attribute.
-  \item Unpredictable special text requirements can also lead to auto-filling failures. For example, the unfilled text boxes in Figure 11 are due to the script not being pre-set to recognise such special long sentence information.
+  \item The script has certain technical limitations when dealing with forms that contain multiple similar required fields. For instance, as the form shown in Figure \ref{fig:pic10}, even though both 'First' and 'Last' fields under 'Name' are mandatory, the script struggles to fill in another field after recognising and filling one with a matching name attribute.
+  \item Unpredictable special text requirements can also lead to auto-filling failures. For example, the unfilled text boxes in Figure \ref{fig:pic11} are due to the script not being pre-set to recognise such special long sentence information.
 \end{itemize}
 \begin{figure}[H]
     \centering
     \begin{minipage}{0.45\textwidth}
         \includegraphics[width=\linewidth]{pic/figure10.png}
-        \caption{Figure 10 - Incomplete 'Name' Field Error}
+        \caption{Incomplete 'Name' Field Error}
+        \label{fig:pic10}
     \end{minipage}
     \hfill 
-    \begin{minipage}{0.45\textwidth}\ContinuedFloat
+    \begin{minipage}{0.45\textwidth}
         \includegraphics[width=\linewidth, height=0.3\textheight]{pic/figure11.png}
-        \caption{Figure 11 - Unrecognised Text Error in Form}
+        \caption{Unrecognised Text Error in Form}
+        \label{fig:pic11}
     \end{minipage}
 \end{figure}
 
-The problem mentioned above was identified on the first day of the experiment. At that time, I considered potential solutions, such as enhancing the heuristic algorithm to recognise and fill more elements or even replacing it with a deep learning algorithm for graphical forms. However, I was cautious about introducing unpredictable changes that could potentially cause more issues, so I did not modify the relevant code. Additionally, Table 1 indicates that the average processing time for automatic form filling is quite long. Particularly on March 22\textsuperscript{nd}, it took an average of 37.79 seconds to process a link, even though it had the highest success rate on that day. In fact, this slower speed can be anticipated, as the complexity of this script code is significantly greater than the first two. Factors such as the recognition of a large, nested dictionary structure, multi-level recursive searches, and the time required for submission checks all contribute to its efficiency. Moreover, the impact of the network environment each time the script is executed should also be considered. Therefore, such fluctuations in processing time are reasonable.
+The problem mentioned above was identified on the first day of the experiment. At that time, I considered potential solutions, such as enhancing the heuristic algorithm to recognise and fill more elements or even replacing it with a deep learning algorithm for graphical forms. However, I was cautious about introducing unpredictable changes that could potentially cause more issues, so I did not modify the relevant code. Additionally, Table \ref{tab:table1} indicates that the average processing time for automatic form filling is quite long. Particularly on March 22\textsuperscript{nd}, it took an average of 37.79 seconds to process a link, even though it had the highest success rate on that day. In fact, this slower speed can be anticipated, as the complexity of this script code is significantly greater than the first two. Factors such as the recognition of a large, nested dictionary structure, multi-level recursive searches, and the time required for submission checks all contribute to its efficiency. Moreover, the impact of the network environment each time the script is executed should also be considered. Therefore, such fluctuations in processing time are reasonable.
 \\
 
-Even though the success rate and efficiency of \texttt{formfill\_crawler} are not very ideal, each respondent has made a sufficient number of submissions as shown in Table 2 during form filling. In this way, they are more likely to get equal participation opportunities in subsequent email replies. Overall, the same script exhibits minimal error in the running data across different experimental cycles. This demonstrates a consistent correlation and stability between the success rate and processing time, indicating that the script is approaching maturity.
+Even though the success rate and efficiency of \texttt{formfill\_crawler} are not very ideal, each respondent has tried a sufficient number of submissions as shown in Table \ref{tab:table2} during form filling. In this way, they are more likely to get equal participation opportunities in subsequent email replies. Overall, the same script exhibits minimal error in the running data across different experimental cycles. This demonstrates a consistent correlation and stability between the success rate and processing time, indicating that the script is approaching maturity.
 \begin{table}[ht]
 \centering
 \label{tab:ai_messages}
@@ -437,14 +441,26 @@ Bargainer & 59 \\
 Impatient Consumer & 54 \\
 \bottomrule
 \end{tabular}
-\caption{Table 2: Number of form submissions by each AI responder}
+\caption{Number of form submissions by each AI responder}
+\label{tab:table2}
 \end{table}
 
-\subsection{Performance of Email Handling Scripts}
+\subsection{Status of Email Sending and Receiving}
+The system keeps detailed records of the daily email sending and receiving activities during the experiment. These records include the date, daily counts of received and successfully sent emails, as well as the success rate of email responding. Theses are used to plot a line chart as seen in Figure \ref{fig:pic12}, which shows the trend of the email response rate over time.
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{pic/figure12.png}
+\caption{Daily Email Delivery and Response Performance from March 16 to April 15}
+\label{fig:pic12}
+\end{figure}
 
+The line chart shows that on the first day of email replies, the success rate was only 73.9\%, with 12 emails failing to receive replies. This issue occurred because the original experimental procedure only allowed \texttt{formfill\_crawl} to store data related to successfully submitted forms in \texttt{cache.json}. Generally, this mechanism should be effective. However, on March 15\textsuperscript{th}, during a high volume of table submissions, the script inaccurately assessed the submission results. This happened because some websites did not return the expected 200 status code. Therefore, despite the website indicating that the form submission was successful, the system backend wrongly recorded the failure message "Form submission failed or confirmation not found". As a result, even though the scammer had successfully received these form data and sent scam emails, the system could not find the corresponding recipient record in \texttt{cache.json}, resulting in the automatic reply not being triggered.
+\\
 
+In order to address this misjudgement and prevent the experiment from ending prematurely, after discussing with my supervisor, I decided to make some adjustments before completing the forms for the second cycle. The specific operation requires modifying just two lines of code, enabling \texttt{cache.json} to store key information from both successful and unsuccessful attempts. This then allows for a complete system re-test. This change ensures the system retains sufficient information to respond to scammers' email in the event of a misjudgement, without affecting the smooth progression of the experiment.
+\\
 
-
+This adjustment has immediately improved the stability of sending and receiving emails. As demonstrated in the subsequent weeks, the daily volume of sent and received emails remained essentially constant, only occasionally failing due to invalid scam domains. Moreover, as shown in Figure \ref{fig:pic12}, although the volume of emails sent and received throughout the experiment showed a gradual declining trend, there were still 5 emails sent and received on the last day, successfully meeting the experiment's expectations.
 
 \chapter{Critical Evaluation}
 
