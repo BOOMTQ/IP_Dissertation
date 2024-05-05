@@ -14,8 +14,6 @@
 \usepackage{float}
 \usepackage[list=true]{subcaption}
 \usepackage{caption}
-% \captionsetup[figure]{labelformat=empty} % This disables automatic labelling of graphics
-% \captionsetup[table]{labelformat=empty} % This disables automatic labelling of tables
 \usepackage[utf8]{inputenc}
 \usepackage{hyperref}
 \usepackage{listings}
@@ -23,7 +21,7 @@
 \usepackage[a4paper, margin=1in]{geometry}
 \usepackage{booktabs}
 \usepackage{graphicx}
-
+\usepackage{array}
 
 \begin{document}
 
@@ -461,6 +459,55 @@ In order to address this misjudgement and prevent the experiment from ending pre
 \\
 
 This adjustment has immediately improved the stability of sending and receiving emails. As demonstrated in the subsequent weeks, the daily volume of sent and received emails remained essentially constant, only occasionally failing due to invalid scam domains. Moreover, as shown in Figure \ref{fig:pic12}, although the volume of emails sent and received throughout the experiment showed a gradual declining trend, there were still 5 emails sent and received on the last day, successfully meeting the experiment's expectations.
+
+\section{The Scammer's Response to the System}
+\subsection{The Change in Response Rate}
+Generally, online scammers often rush to implement scams, which makes them respond quickly after receiving form submissions. Under the system setting, the number of respondents and scammers is a one-to-one match. Therefore, by counting the number of new reply strategies at the end of each cycle and dividing it by the total number of forms successfully submitted that week, the response rate of scammers to the system can be essentially estimated. The detailed results are shown in Table \ref{tab:table3}.
+{\small
+\begin{table}[ht]
+\centering
+\label{tab:performance}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{@{}ccccccc@{}}
+\toprule
+\textbf{Experiment Period} & \textbf{New Scammers} & \textbf{Successfully Submitted Forms} & \textbf{Scammers' Response Rate (\%)} \\
+\midrule
+Week 1 & 34 & 146 & 23.29 \\
+Week 2 & 9 & 29 & 31.03 \\
+Week 3 & 10 & 27 & 37.04 \\
+Week 4 & 11 & 22 & 50.00 \\
+\midrule
+Total/Average & 64 & 224 & 28.57 \\
+\bottomrule
+\end{tabular}
+}
+\caption{Email Response Rate of Pet Scammers to the System}
+\label{tab:table3}
+\end{table}
+} 
+
+Before the experiment, I reviewed the research on pet scam websites conducted by Matthew and Benjamin \cite{price_resource_2020}, which found that some scammers might be the masterminds behind numerous separate scam websites. This suggests that we may encounter scammers managing a large number of pet scam websites during the experiment. And if they realise that different websites have received forms that filled with the same domain name within a certain period, they may become more vigilant and stop sending scam emails. Based on this conjecture, I predicted that the response rate of scammers to the system will gradually decrease during the experiment.
+\\
+
+However, Table \ref{tab:table3} shows results that are entirely opposite to the forecast. Specifically, the scammers' response rate to the system has been increasing over time. During the experimental process, the forms filled in the first week covered some pet scam websites that had been exposed earlier. These scammers may not have been as active during the experiment, which could explain why the first week's response rate was only 23.29\%. However, even if the forms filled out are all from pet scam websites exposed in the past 7 days, the trend of the response rate in the subsequent three weeks did not match the prediction. Therefore, the change in the scammers’ response rate during the experiment appears to be random and without clear patterns. It's worth noting that this does not contradict Matthew and Benjamin's research results. It merely indicates that there is no obvious connection between these scammers. Alternatively, they might be so greedy or careless that they did not carefully check the domain information filled in forms.
+\\
+
+In order to understand the overall response of the scammers to the system during the experiment, the last row of Table \ref{tab:table3} shows the total number of scammers involved in email interactions and the total number of successfully submitted forms. It then divides the two to get the average response rate. This value reached 28.57\%, which means that nearly three out of every ten scammers who received the form actively sent emails to the system. Although this response rate is not high, it can generally produce good results under a large base of form filling. As in this experiment, the system successfully established dialogue contact with 64 real pet scammers within a month and interfered with their pet scam implementations to different extents.
+
+\subsection{Analyse the Content of Conversations}
+
+
+
+
+
+
+
+\section{Comparison of Response Strategies}
+
+
+
+
+
 
 \chapter{Critical Evaluation}
 
