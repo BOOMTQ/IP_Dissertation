@@ -38,7 +38,7 @@ I would like to express my special thanks to my supervisor, Dr Matthew Edwards, 
 I would also like to give my thanks to School of Engineering for inviting me into UoB Computer Science OpenAI Team, which reimburses me the cost of using the different APIs of OpenAI.
 \\
 \\
-Sign up for GitHub Student Developer Pack provides me free access to many useful tools, involving \href{https://www.mailgun.com}{Maligun} and \href{https://www.name.com}{Name.com}. Appreciate the resources it provides!
+Sign up for GitHub Student Developer Pack provides me free access to many useful tools, involving \href{https://www.mailgun.com}{Mailgun} and \href{https://www.name.com}{Name.com}. Appreciate the resources it provides!
 
 \makedecl
 
@@ -239,13 +239,13 @@ The core requirement of this project is to effectively understand and generate n
 
 \chapter{Project Execution}
 \section{Automatic Receipt of Inbound Emails}
-Due to the large amount of email correspondence generated when the system induces fraudsters, the demand for the domain mail server has become a primary issue. In this project, two domains called “liveonline.ninja” and “malabaka.social” were registered on \href{https://www.name.com}{Name.com}, which were used for the system's testing and experimental stages in turn. \href{https://www.mailgun.com}{Maligun.com}, as a scalable email sending platform, is a significant tool for executing this project. Under the guidance of the official documentation \cite{noauthor_domain_nodate}, two domains were added in Mailgun and configured the DNS records to track the key information of all email correspondence under the domain.
+Due to the large amount of email correspondence generated when the system induces fraudsters, the demand for the domain mail server has become a primary issue. In this project, two domains called “liveonline.ninja” and “malabaka.social” were registered on \href{https://www.name.com}{Name.com}, which were used for the system's testing and experimental stages in turn. \href{https://www.mailgun.com}{Mailgun.com}, as a scalable email sending platform, is a significant tool for executing this project. Under the guidance of the official documentation \cite{noauthor_domain_nodate}, two domains were added in Mailgun and configured the DNS records to track the key information of all email correspondence under the domain.
 \\
 
 As shown in Figure \ref{fig:pic4}, the Logs page of Mailgun allows users to view and track all email content and their statuses under the specified domain within the past five days of communications. However, these log records are automatically deleted after five days. To ensure the 31-days experiment can proceed smoothly, a script named \texttt{email\_crawl.py} was created for automated retrieval and long-term storage of inbound emails. First, configure the Mailgun API key and the required domain name in the system. Then, use the \texttt{request.get()} method to batch transfer emails based on a customised time range and event status. Each email should be named according to its unique receiving time, represented by the Unix timestamp. To ensure readability of the archived email content, the program formats each inbound email by retaining only the title, body, sender, and recipient information. This information is finally stored in a separate JSON file.
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\linewidth,height=0.2\textheight]{pic/figure4.png}
+\includegraphics[width=0.95\linewidth,height=0.2\textheight]{pic/figure4.png}
 \caption{Mailgun logs page of malabaka.social}
 \label{fig:pic4}
 \end{figure}
@@ -466,7 +466,6 @@ Generally, online scammers often rush to implement scams, which makes them respo
 {\small
 \begin{table}[ht]
 \centering
-\label{tab:performance}
 \resizebox{\textwidth}{!}{
 \begin{tabular}{@{}ccccccc@{}}
 \toprule
@@ -495,11 +494,54 @@ However, Table \ref{tab:table3} shows results that are entirely opposite to the 
 In order to understand the overall response of the scammers to the system during the experiment, the last row of Table \ref{tab:table3} shows the total number of scammers involved in email interactions and the total number of successfully submitted forms. It then divides the two to get the average response rate. This value reached 28.57\%, which means that nearly three out of every ten scammers who received the form actively sent emails to the system. Although this response rate is not high, it can generally produce good results under a large base of form filling. As in this experiment, the system successfully established dialogue contact with 64 real pet scammers within a month and interfered with their pet scam implementations to different extents.
 
 \subsection{Analyse the Content of Conversations}
+After the experiment, numerous email conversation records were stored in the “archive” folder. In this section, I categorised these email records based on the number of conversations and analysed the commonalities and characteristics of the scam content. In this study, the successful receipt and sending of an email are defined as one conversation. By counting the number of interactions between the system and each scammer, I have summarised these data and conducted a detailed statistical analysis, including calculating the minimum, maximum, average, and median. Based on these analyses, the average is finally decided to be used as the main classification criteria, since it reflects the central tendency of all dialogue activities. According to this criteria, the email conversations are divided into three periods: early stage (from the minimum to half of the average), middle stage (from half of the average to 1.5 times the average), and late stage (exceeding 1.5 times the average up to the maximum). Specific classification results are shown in Table \ref{tab:table4}, which includes the number of scammers who persisted to different periods and the distribution of corresponding response strategies.
+\begin{table}[H]
+\centering
+\begin{tabular}{@{}lccccc@{}} 
+\toprule
+Period & Count & Investigator & Newbie & Bargainer & Impatient Consumer \\ 
+\midrule
+Early (1-3) & 33 & 12 & 3 & 10 & 8 \\
+Midterm (4-11) & 17 & 0 & 7 & 6 & 4 \\
+Late (12-48) & 14 & 1 & 7 & 0 & 6 \\
+Total  & 64 & 13 & 17 & 16 & 18 \\
+\bottomrule
+\end{tabular}
+\caption{Scammer Interaction and Strategy Usage by Period}
+\label{tab:table4}
+\end{table}
 
+From this table, it can be seen that half of the scammers abandoned the dialogue with the system within the first three days. After examining the specific email content, I found that the length of the conversation and the reply strategy are closely related. For instance, the "Investigator" and "Bargainer" strategies are almost only effective in the early and mid-term dialogues. These two strategies respectively played the professional roles of interviewer and bargainer in the dialogue, excelling at identifying information gaps in scammer emails, and posing various questions about pet health certificates, information safety, and costs. In particular, the Investigator, whose responses often included numbered questions, may contain many professional inquiries that scammers did not anticipate, putting them under pressure. Therefore, only one person persisted in targeting the investigator for fraud, and their conversation ended on the 35th exchange.
+\\
 
+In contrast, the performances of the other two strategies are more stable. Their diversity in language and naturalness in emotion made the conversation topics more diversified, not limited to sensitive topics such as the cost and authenticity of online pet sales. Since online pet purchases are relatively new for “Newbies”, these individuals typically raised one basic question in an email conversation, which left many new questions to continue the dialogue. Meanwhile, scammers believed that such people were easy to deceive, so they were more willing to invest their time. A similar situation also occurred with the “Impatient Consumer”. Although this personality was more likely to lose patience in communication, their anxiety about pet orders might also make scammers mistakenly believe that as long as these anxious questions were answered, a transaction could be promoted. As shown in Table \ref{tab:table4}, scammers are more willing to invest their time in these seemingly easy-to-manipulate potential victims.
+\\
 
+While the system recorded email conversations from 64 different scammers, a detailed analysis of their email content revealed that they frequently employ similar scam tactics across various respondents. For instance, in just the first email in the early period, it was found that 49 scammers used very similar template emails or automated responses.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{pic/figure13.png}
+\caption{First Scam Email from Dalmatianhomepty@gmail.com}
+\label{fig:pic13}
+\end{figure}
+As shown in Figure \ref{fig:pic13}, this type of email typically begins with a detailed description of the pet's current status, asserts that the pet has been registered with the AKC (American Kennel Club), discusses fees, and finally requests the personal information of potential victims. Interestingly, even though the script randomly filled in the name as Max on the scam form, and there is no puppy named Max on this website, the scammer kept mentioning Max's health status as if this puppy truly existed. According to statistics, at least 36 scammers have used this template in their initial email. Additionally, another 13 fraudsters used a different template, typically sending the content of the system-submitted form as an automatic receipt email. The extremely quick response time of these emails, such as the email in Figure \ref{fig:pic14} which was sent to the domain name server of "malabaka.social" just 69 seconds after the form was submitted, suggests they are automated replies.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.35\linewidth]{pic/figure14.png}
+\caption{First Reply email from info@purrfectdevonrex.com}
+\label{fig:pic14}
+\end{figure}
+The template response was not only used in the first email but also in subsequent conversations with multiple scammers. Different templates might have been triggered multiple times if the AI respondent asked questions that were preset by the scammers. For example, during a conversation between Newbie and a scammer, since the system's settings do not allow clicking on any links sent by the scammer, Newbie asked about the content in the link and sent almost the same email three times, each time triggering the same reply.
+\\
 
-
+In most email exchanges, these templated responses primarily used in the early and early-middle periods. Even some manually replied emails were typically responded to in a more patient and polite manner. However, towards the end of the midterm period, many scammers began rushing the transaction. By the later period, their tone became increasingly anxious and emotional, attempting to persuade potential victims to complete the payment through various guarantees.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{pic/figure15.png}
+\caption{Conversations between Impatient Consumer and Andylabradorretrieverhome@gmail.com at Different Periods}
+\label{fig:pic15}
+\end{figure}
+Figure \ref{fig:pic15} shows several conversations between the Impatient Consumer and a scammer at various periods, significantly reflecting the trend described earlier. Especially in the 16th email, the scammer even used the Bible to prove his sincerity. Similar rhetoric has also been recorded in previous research by Whittaker and Button \cite{whittaker_understanding_2020}. By the 25th email, the scammer had already realised that he had been fooled, but he didn't give up on this scam until after the 38th email. In fact, this pattern is the linguistic change that most pet scammers who have had long-term interactions with the system generally experience. After realising that their time has been wasted, these scammers usually show obvious anger, some threaten to block or report emails, and some directly cut off replies. However, regardless of the outcome, these scammers have already had 14 to 28 days of time and energy wasted by the system, effectively interfering with their pet scam plans. Within 9 days after the end of the experiment, the system still received four different emails asking whether there was still interest in buying pets, showing the persistent enthusiasm of pet scammers.
 
 
 \section{Comparison of Response Strategies}
