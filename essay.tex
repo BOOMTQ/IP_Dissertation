@@ -371,20 +371,20 @@ As the experiment progressed, the system automatically logged execution data for
 {\small
 \begin{table}[ht]
 \centering
-\label{tab:performance}
+\renewcommand{\arraystretch}{1.5}
 \resizebox{\textwidth}{!}{
-\begin{tabular}{@{}ccccccc@{}}
+\begin{tabular}{@{}|c|c|c|c|c|c|c|@{}}
 \toprule
 \textbf{Date} & \textbf{Script Name} & \textbf{Duration (s)} & \textbf{Scraped Links} & \textbf{Attempted Links} & \textbf{Success Rate (\%)} & \textbf{Avg Time Per Link (s)} \\
 \midrule
 Mar 15 & contactpage\_crawl & 386 & 325 & 334 & 97.3\% & 1.16 \\
 Mar 22 & contactpage\_crawl & 53 & 42 & 42 & 100.0\% & 1.26 \\
 Mar 29 & contactpage\_crawl & 51 & 44 & 45 & 97.8\% & 1.13 \\
-Apr 5 & contactpage\_crawl & 65 & 43 & 44 & 97.7\% & 1.48 \\
+Apr 5 & contactpage\_crawl & 65 & 43 & 44 & 97.7\% & 1.48 \\ \hline
 Mar 15 & petscam\_crawl & 702 & 334 & 334 & 100.0\% & 2.10 \\
 Mar 22 & petscam\_crawl & 97 & 42 & 42 & 100.0\% & 2.31 \\
 Mar 29 & petscam\_crawl & 104 & 45 & 45 & 100.0\% & 2.31 \\
-Apr 5 & petscam\_crawl & 110 & 44 & 44 & 100.0\% & 2.50 \\
+Apr 5 & petscam\_crawl & 110 & 44 & 44 & 100.0\% & 2.50 \\ \hline
 Mar 15 & formfill\_crawl & 9254 & 146 & 325 & 44.9\% & 28.47 \\
 Mar 22 & formfill\_crawl & 1587 & 19 & 44 & 69.0\% & 37.79 \\
 Mar 29 & formfill\_crawl & 1373 & 27 & 44 & 61.4\% & 31.20 \\
@@ -544,11 +544,38 @@ In most email exchanges, these templated responses primarily used in the early a
 Figure \ref{fig:pic15} shows several conversations between the Impatient Consumer and a scammer at various periods, significantly reflecting the trend described earlier. Especially in the 16th email, the scammer even used the Bible to prove his sincerity. Similar rhetoric has also been recorded in previous research by Whittaker and Button \cite{whittaker_understanding_2020}. By the 25th email, the scammer had already realised that he had been fooled, but he didn't give up on this scam until after the 38th email. In fact, this pattern is the linguistic change that most pet scammers who have had long-term interactions with the system generally experience. After realising that their time has been wasted, these scammers usually show obvious anger, some threaten to block or report emails, and some directly cut off replies. However, regardless of the outcome, these scammers have already had 14 to 28 days of time and energy wasted by the system, effectively interfering with their pet scam plans. Within 9 days after the end of the experiment, the system still received four different emails asking whether there was still interest in buying pets, showing the persistent enthusiasm of pet scammers.
 
 \section{Comparison of Response Strategies}
+After collecting statistical data on the number and duration of conversations between each reply strategy and scammers, I used various statistical methods including calculating averages, median sorting, and extreme value analysis. The relevant key data results are shown in Table \ref{tab:table5}. This section aims to determine the most effective reply strategy through the comparative analysis of these data.
+{\small
+\begin{table}[ht]
+\centering
+\renewcommand{\arraystretch}{1.6}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{@{}|c|c|c|c|c|c|c|@{}}
+\toprule
+\textbf{Strategy Name} & \textbf{Average Conversation} & \textbf{Median Conversation} & \textbf{Average Duration (h)} & \textbf{Median Duration (h)} & \textbf{Max Conversation} & \textbf{Max Duration (h)} \\ 
+\midrule
+Investigator & 3.92 & 1 & 48.02 & 0 & 35 & 552.52 \\ \hline
+Newbie & 11.35 & 9 & 184.15 & 191.62 & 48 & 561.87\\ \hline
+Bargainer & 3.44 & 3 & 65.56 & 55.62 & 9 & 216.85\\ \hline
+Impatient Consumer & 10.78 & 6 & 188.07 & 119.82 & 44 & 669.08\\ 
+\bottomrule
+\end{tabular}
+}
+\caption{Comparison of response strategies across various metrics}
+\label{tab:table5}
+\end{table}
+} 
 
+From the table, it can be seen that the median duration of the investigation is 0 hours. This is because the calculation of duration is based on the timestamp difference between the last email from the scammer and the first email in the email interaction. Combined with the data shown in Table \ref{tab:table4}, we know that most investigators ended their strategies early on, and usually these conversations had no follow-up after replying to the scammer's first template email or automatic reply, thus not wasting any of the scammer's time.
+\\
 
+Comparing the data in Table \ref{tab:table5}, it can be found that Newbie and Impatient Consumer significantly outperform Investigator and Bargainer in all metrics. These higher values indicate that they can communicate with scammers for a longer time, wasting more of the scammer's time, thereby more effectively disrupting scam activities. In addition, the Investigator had 35 dialogues with the scammer in a key interaction that lasted 552.52 hours, indicating that the investigator strategy may perform exceptionally well when communicating with some particularly professional and patient scammers. Meanwhile, although the Bargainer exceeds the Investigator in both average and median duration, it does not exhibit particularly outstanding performance, making it the most mediocre strategy.
+\\
 
+Considering that Newbies and Impatient Consumers perform similarly on key figures, I further applied the U-test to calculate the p-value of the number of conversations and duration between these two strategies to determine whether there is a statistical difference between them. Based on the method proposed by Mann and Whitney in 1947 \cite{mann_test_1947}, the U-test involves ranking two independent samples and calculating the sum of ranks, then using these sums to estimate the U-statistic, and finally finding the p-value in the standard normal distribution table through the Z value.
+\\
 
-
+Considering the complexity and potential for error in manually calculating the U-test, I used the \texttt{mannwhitneyu} function \cite{noauthor_scipystatsmannwhitneyu_nodate} integrated in Python to simplify the calculation, which resulted in a p-value of 0.302 for the number of dialogues and a p-value of 0.397 for the duration. These p-values are higher than the commonly used significance threshold of 0.05, suggesting no statistically significant difference between Newbies and Impatient Consumers regarding the number and duration of dialogues. Nevertheless, Table \ref{tab:table4} has revealed that Newbie participated more in long-term dialogues, and according to Table 5, Newbie also performed better in terms of the number of dialogues and median dialogue duration. Hence, after considering various factors, Newbie is evaluated as the most effective reply strategy.
 
 \chapter{Critical Evaluation}
 
