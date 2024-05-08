@@ -22,6 +22,8 @@
 \usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage{array}
+\usepackage{hyperref}
+
 
 \begin{document}
 
@@ -35,7 +37,7 @@ This project targets the growing threat of online pet scams by creating an autom
 I would like to express my special thanks to my supervisor, Dr Matthew Edwards, for his help and guidance in this project.
 \\
 \\
-I would also like to give my thanks to School of Engineering for inviting me into UoB Computer Science OpenAI Team, which reimburses me the cost of using the different APIs of OpenAI.
+I would also like to give my thanks to School of Engineering for inviting me into UoB Computer Science OpenAI Team, which reimburses me the cost of using the different APIs of \href{https://openai.com/}{OpenAI}.
 \\
 \\
 Sign up for GitHub Student Developer Pack provides me free access to many useful tools, involving \href{https://www.mailgun.com}{Mailgun} and \href{https://www.name.com}{Name.com}. Appreciate the resources it provides!
@@ -98,7 +100,8 @@ DNS                 &:     & Domain Name System
 CSS                 &:     & Cascading Style Sheets
 \\
 DOM                 &:     & Document Object Model
-
+\\
+TPM                 &:     & Tokens Per Minute
 
 \end{tabular}
 \end{quote}
@@ -229,10 +232,10 @@ FuzzyWuzzy is a Python library used for string matching. Unlike Regex, once this
 In response to the demand for generating a large number of emails, the conventional approach involves using predefined text templates to generate email content. However, for a more advanced automated response system, I decided to integrate the GPT model.
 \\
 
-GPT, short for Generative Pre-Trained Transformer, has been extensively pre-trained on natural language data. It can predict and generate subsequent content after receiving text, images, or sound through the transformer \cite{3blue1brown_but_2024}. Since the release of the first GPT-1 version in June 2018, OpenAI has developed numerous models with various functions \cite{noauthor_openai_nodate}. For instance, the GPT series focuses on understanding and generating natural language or code; DALL·E specialises in image generation and editing; Whisper, a voice recognition model, and Jukebox is a music generation model. And these models are still being continuously updated and optimised.
+GPT, short for Generative Pre-Trained Transformer, has been extensively pre-trained on natural language data. It can predict and generate subsequent content after receiving text, images, or sound through the transformer \cite{3blue1brown_but_2024}. Since the release of the first GPT-1 version in June 2018, \href{https://openai.com/}{OpenAI} has developed numerous models with various functions \cite{noauthor_openai_nodate}. For instance, the GPT series focuses on understanding and generating natural language or code; DALL·E specialises in image generation and editing; Whisper, a voice recognition model, and Jukebox is a music generation model. And these models are still being continuously updated and optimised.
 \\
 
-The core requirement of this project is to effectively understand and generate natural language text. In this case, the newly released GPT-3.5-turbo-0125 and GPT-4-0125-preview models both meet this requirement well. The processing capabilities of these two models have reached up to 60,000 tokens (approximately 45,000 English words) and 300,000 tokens (approximately 225,000 English words) per minute, respectively. The latter can also reduce the ``laziness" of the model not completing tasks \cite{noauthor_openai_nodate}. This demonstrates that by integrating the API key into the system, adjusting both the necessary prompts and other parameters according to the code template provided by OpenAI \cite{noauthor_openai_nodate}, AI can automatically generate email content in batches using human language logic. Which will result in an efficient response speed and a natural interaction experience.
+The core requirement of this project is to effectively understand and generate natural language text. In this case, the newly released GPT-3.5-turbo-0125 and GPT-4-0125-preview models both meet this requirement well. The processing capabilities of these two models have reached up to 60,000 tokens (approximately 45,000 English words) and 300,000 tokens (approximately 225,000 English words) per minute, respectively. The latter can also reduce the ``laziness" of the model not completing tasks \cite{noauthor_openai_nodate}. This demonstrates that by integrating the API key into the system, adjusting both the necessary prompts and other parameters according to the code template provided by \href{https://openai.com/}{OpenAI} \cite{noauthor_openai_nodate}, AI can automatically generate email content in batches using human language logic. Which will result in an efficient response speed and a natural interaction experience.
 
 
 
@@ -365,6 +368,7 @@ After finishing the coding and thorough testing of the project, I scheduled the 
 
 
 \chapter{Critical Evaluation}
+\label{sec:4}
 \section{Script Performance Analysis}
 \subsection{Performance of Scam Page Interaction Scripts}
 As the experiment progressed, the system automatically logged execution data for each script, including duration and success rate. This data is summarised in Table \ref{tab:table1}, which clearly illustrates the performance of the three scripts responsible for interaction with pet scam pages.
@@ -461,6 +465,7 @@ This adjustment has immediately improved the stability of sending and receiving 
 
 \section{The Scammer's Response to the System}
 \subsection{Analysis of Scammer Response Rates}
+\label{sec:4.2.1}
 Generally, online scammers often rush to implement scams, which makes them respond quickly after receiving form submissions. Under the system setting, the number of respondents and scammers is a one-to-one match. Therefore, by counting the number of new reply strategies at the end of each cycle and dividing it by the total number of forms successfully submitted that week, the response rate of scammers to the system can be essentially estimated. The detailed results are shown in Table \ref{tab:table3}.
 {\small
 \begin{table}[ht]
@@ -493,6 +498,7 @@ However, Table \ref{tab:table3} shows results that are entirely opposite to the 
 In order to understand the overall response of the scammers to the system during the experiment, the last row of Table \ref{tab:table3} shows the total number of scammers involved in email interactions and the total number of successfully submitted forms. It then divides the two to get the average response rate. This value reached 28.57\%, which means that nearly three out of every ten scammers who received the form actively sent emails to the system. Although this response rate is not high, it can generally produce good results under a large base of form filling. As in this experiment, the system successfully established the email communication with 64 real pet scammers within a month and interfered with their pet scam implementations to different extents.
 
 \subsection{Analysis of Scam Tactics Used in Email Conversations}
+\label{sec:4.2.2}
 After the experiment, numerous email conversation records were stored in the “archive” folder. In this section, I categorised these email records based on the rounds in conversation and analysed the commonalities and characteristics of the scam content. In this study, the successful receipt and sending of an email are defined as a round of conversation, or called a set of messages. By counting the number of rounds between the system and each scammer, I have summarised these data and conducted a detailed statistical analysis, including calculating the minimum, maximum, average, and median. Based on these analyses, the average is finally decided to be used as the main classification criteria, since it reflects the central tendency of all messages. According to this criteria, each email conversation is divided into three periods: early stage (from the minimum to half of the average), middle stage (from half of the average to 1.5 times the average), and late stage (exceeding 1.5 times the average up to the maximum). Specific classification results are shown in Table \ref{tab:table4}, which includes the number of scammers who persisted to different periods and the distribution of corresponding response strategies.
 \begin{table}[H]
 \centering
@@ -543,13 +549,14 @@ In most email exchanges, these templated responses primarily used in the early a
 Figure \ref{fig:pic15} shows several messages sent from a scammer at various periods, significantly reflecting the trend described earlier. Especially in the 16th email, the scammer even used the Bible to prove his sincerity. Similar rhetoric has also been recorded in previous research by Whittaker and Button \cite{whittaker_understanding_2020}. By the 25th email, the scammer had already realised that he had been fooled, but he didn't give up on this scam until after the 38th email. In fact, this pattern is the linguistic change that most pet scammers who have had long-term interactions with the system generally experience. After realising that their time has been wasted, these scammers usually show obvious anger, some threaten to block or report emails, and some directly cut off replies. However, regardless of the outcome, these scammers have already had 14 to 28 days of time and energy wasted by the system, effectively interfering with their pet scam plans. Within 9 days after the end of the experiment, the system still received four different emails asking whether there was still interest in buying pets, showing the persistent enthusiasm of pet scammers.
 
 \subsection{Analysis of Repetitive Issues in Email Responses and Their Causes}
+\label{sec:4.2.3}
 Similar to the behaviours of some scam emails, the system occasionally repeated similar or previously asked questions. However, it was not due to the use of an automatic reply template. In fact, I emphasised the importance of avoiding repetitive questions while designing prompts for generating email text to prevent this phenomenon. However, this preventive measure did not produce the desired result.
 \\
 
 In the first week of the experiment, I found that some scammers stated in their responses that the asked question was already answered, suggesting a review of previous emails. This led me to understand the real issue, which was that the system did not reference the relevant email history when generating replies, but only considered the content of the emails received that day. In fact, when building this auto-reply function, I did consider the necessity of reading email history. However, I was concerned that if the system had to deal with all the history related to a specific email, the amount of text processed each time might exceed the limit of 300,000 tokens (about 225,000 English words) that the GPT-4-0125-preview model can handle per minute. Therefore, I chose a solution that uses only a single email as input, and thought that the record of the previous email usually kept at the end of the email would provide the necessary context for generating the reply.
 \\
 
-However, looking back at the experimental data in Figure \ref{fig:pic12}, it is evident that the number of emails requiring daily processing did not exceed 50. And the performance of \texttt{corn.py} only supports automatic replies to 5-6 emails per minute, far from approaching the limit of 300,000 tokens per minute. This ultimately suggests that my excessive concerns have led to irrational design choices.
+However, looking back at the experimental data in Figure \ref{fig:pic12}, it is evident that the number of emails requiring daily processing did not exceed 50. And the performance of \texttt{corn.py} only supports automatic replies to 5-6 emails per minute, far from approaching the limit of 300,000 tokens per minute(TPM). This ultimately suggests that my excessive concerns have led to irrational design choices.
 
 \section{Comparison of Response Strategies}
 After collecting statistical data on the duration and the rounds of email conversation between each reply strategy and scammer, I used various statistical methods including calculating averages, median sorting, and extreme value analysis. The relevant key data results are shown in Table \ref{tab:table5}. This section aims to determine the most effective reply strategy through the comparative analysis of these data.
@@ -586,19 +593,32 @@ Considering that Newbies and Impatient Consumers perform similarly on key figure
 Considering the complexity and potential for error in manually calculating the U-test, I used the \texttt{mannwhitneyu} function \cite{noauthor_scipystatsmannwhitneyu_nodate} integrated in Python to simplify the calculation, which resulted in a p-value of 0.302 for the rounds of conversation and a p-value of 0.397 for the duration. These p-values are higher than the commonly used significance threshold of 0.05, suggesting no statistically significant difference between Newbies and Impatient Consumers regarding the rounds and duration of conversation. Nevertheless, Table \ref{tab:table4} has revealed that Newbie participated more in long-term dialogues, and according to Table 5, Newbie also performed better in terms of the conversation rounds and median conversation duration. Hence, after considering various factors, Newbie is evaluated as the most effective reply strategy.
 
 \chapter{Conclusion}
-In conclusion, this project effectively combats the rise of online pet scams by employing an automated system designed to deplete scammers' resources and deter fraudulent activities. Over a four-week experimental phase, four robotic responders consistently engaged scammers, wasting at least a month of their time. Dozens of scammers continued to interact with the system even after the experiment concluded. This not only aids in scam prevention but also refines scam-baiting strategies, contributing valuable insights into the fight against non-delivery fraud and advance fee fraud.
+In conclusion, I have successfully built an automatic response system, applying multiple automated scripts to disrupt with online pet scams. This mainly includes building two crawlers that extract HTML text using the \texttt{BeautifulSoup} and \texttt{requests} libraries in Python. The collected pet scam URLs were used as targets for a large amount of contact form filling. Then, the use of the \texttt{Selenium} library helped me identify and automatically fill in form texts, thereby realising an automatic script that can interact with JavaScript dynamic pages. The domain mail server built on \href{www.mailgun.com}{Mailgun} and the well-organised data classification storage helped to achieve the sending and receiving of emails, which was inseparable from the support of four response strategies generated by the GPT language model.
 \\
 
-The future direction of this project may focus on integrating the script for filling non-delivery fraud websites with other systems that can classify fraudulent advertisements or websites. This could include the code for automatic detection of pet scam websites \cite{mehmedov_automated_2021}.
+In the experiment, the two scripts used to crawl the basic URLs, \texttt{petscam\_crawl} and \texttt{contactpage\_crawl}, showed a success rate close to 100\%. Similar high-efficiency performance also appeared in the \texttt{email\_crawl} script used for daily email archiving. However, despite multiple improvements to the \texttt{formfill\_crawl} script, the success rate of form submission could only be maintained between 44\% - 70\%, and it has not been able to reach the initial target of over 80\%. This is due to the complex and diverse structure of scam forms, which is difficult to fully predict.
+\\
 
+On the first day of the experiment, when running \texttt{corn.py} to respond to scammers' emails, the email response rate was only 73.9\%. After discovering that this problem was due to the misjudgement during form submission, I promptly modified the data storage range in \texttt{cache.json}, successfully raising the subsequent email response success rate to over 93\%. Furthermore, by classifying scam texts by duration and conducting targeted analysis, I found that scammers generally use email templates and automatic replies in their emails. Moreover, as time goes on, the emotional expression of scam email content becomes more and more obvious. In the end, through statistical analysis on the dialogue duration and message quantity of different strategies, including using \texttt{U-test} and other statistical methods, I assessed that the reply strategy named ``Newbie" most effectively disrupted pet scam activities among the four strategies. The evaluation and analysis results of the above scripts are detailed in the \texttt{Chapter} \ref{sec:4} of the paper.
+\\
 
+Regarding the actual execution effect of the automatic response system in the experiment, I believe there are still many areas that need to be improved, the first of which is \texttt{formfill\_crawl} with the lowest success rate. Currently, this script uses a complex dictionary nesting structure for form recognition, which is convenient for adding and adjusting at any time. However, to maintain a high text recognition rate, this structure requires the developer to constantly accumulate enough experience to continue updating more scam form elements. In addition, the performance of this recognition method is not ideal as the process from opening to submitting a form requires an average of 32.77 seconds. In the testing phase of the project, I actually thought of some better alternatives.For instance, modify the present heuristic search recognition to deep learning for graphic forms and object detection for form structures. This adjustment will adapt the variable form structure in scam websites, thereby enhancing the accuracy and speed of form recognition. However, due to my insufficient knowledge reserve in machine learning and deep learning, the time cost of relearning is too high. In order to prioritise the successful completion of the project, I gave up optimising this script. However, this is definitely a method worth researching and trying. If I have another chance to retry this project, I will prioritise this method when writing \texttt{formfill\_crawl}. Because I believe that the success of this method will bring more accurate form recognition and better efficiency. Furthermore, the maturity of automated form filling will also bring a better future for this project, since it can be integrated with other systems for classifying fraudulent advertisements or websites, such as the system developed by Ronel for automatically detecting pet scam websites \cite{mehmedov_automated_2021}.
+\\
+
+Secondly, in \texttt{Section} \ref{sec:4.2.3}, we have discussed the feasibility and importance of allowing the system to read archives when replying to scam emails. Even after \href{https://openai.com/}{OpenAI} officially reduced the token limit of the GPT-4 language model to 30,000 TPM on April 9th \cite{noauthor_openai_nodate}, the plan to let \texttt{corn.py} read the history when replying to emails remains feasible. In this plan, we can set the maximum number of emails and text tokens that can be processed in \texttt{corn.py}, according to the limit of 30,000 TPM and the context window limit of 128,000 tokens. Error handling logic can also be added to the code, so that even if the token limit is exceeded during the request, the program won't crash immediately, but will maintain the smooth progress of the email reply by waiting and trying again.
+\\
+
+In \texttt{Section} \ref{sec:4.2.1}, I analysed the changes in the email response rate of the scammers to the system under four experimental cycles, and obtained a response rate that grew over time. This result is completely contrary to my prediction, and it does not conform to the relevant research that Matthew and Benjamin have done \cite{price_resource_2020}. Since scammers generally do not actively contact us if they feel that they will be induced to fraud, I can only temporarily attribute this changing trend to randomness and no obvious rules. But this interesting result is worth further research. If I have the chance, I plan to do more cycles of experiments, collect more data, to determine whether the response rate of the scammers is in line with my initial expectations.
+\\
+
+In the end, I am not completely satisfied with the overall architecture of the system. Although the current decentralised architecture successfully supports the independent operation and error checking of scripts in experiments, it is still not mature in terms of structure. Therefore, I plan to integrate these independently running scripts by having them call each other, and completely convert the JSON data stored in the system to database management. This not only facilitates the retrieval and analysis of the captured data but also avoids the system page appearing unorganised.
 
 % \bibliographystyle{ieee}
 \bibliography{references}
 
 \appendix
 
-\chapter{Appendix A: }
+\chapter{Appendix}
 \label{}
 
 
